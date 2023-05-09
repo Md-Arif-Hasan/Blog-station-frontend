@@ -1,22 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import { createBlog } from "../../services/blogList";
 import "../Styles/createBlog.css";
 import { useNavigate } from "react-router-dom";
+import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
+import { AuthContext } from "../../contexts/contexts";
+import { useContext } from "react";
 
 export default function Form() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
   const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
-
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDescription, setErrorDescription] = useState(false);
 
   const [errorLineTitle, setErrorLineTitle] = useState("");
   const [errorLineDescription, setErrorLineDescription] = useState("");
+  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
+
 
   const navigate = useNavigate();
+
+  
+  useEffect(() => {
+    if (!checkLoggedIn()) {
+      navigate("/dashboard");
+    }
+  }, []);
+
 
   const submit = async (e) => {
     e.preventDefault();
@@ -73,6 +84,7 @@ export default function Form() {
 
   return (
     <>
+      <NavbarDashboard />
       <div className="page">
         <div className="image">
           <img
@@ -108,15 +120,17 @@ export default function Form() {
               variant="outlined"
               error={errorDescription}
               helperText={errorLineDescription}
-              
             />
 
-            <div>
-              <Button className="button" onClick={submit} variant="contained">
+            <div className="profileButtons">
+              <Button variant="contained" className="goBack" onClick={submit}>
                 Create
               </Button>
-
-              <Button className="button" onClick={ ()=> navigate("/dashboard")} variant="outlined">
+              <Button
+                variant="outlined"
+                className="save"
+                onClick={() => navigate("/dashboard")}
+              >
                 Cancel
               </Button>
             </div>

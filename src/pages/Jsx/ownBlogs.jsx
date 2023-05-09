@@ -1,53 +1,44 @@
 import { useEffect, useState } from "react";
-import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
-import Navbar from "../../components/Jsx/Navbar";
 import Pagination from "../../components/Jsx/Pagination";
-import { useContext } from "react";
+import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
 import { AuthContext } from "../../contexts/contexts";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Blogs from "./singleAuthorBlogs";
 
-import Blogs from "../../components/Jsx/blogs";
-import "../Styles/dashboard.css";
-//import { isLoggedIn } from "../../services/loggedIn";
 
 export default function Dashboard() {
-  //const [loggedIn, setLoggedIn] = useState(false);
-  const [signedIn, setSignedIn] = useState(false);
-
   const [blogCount, setBlogCount] = useState(0);
 
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const { checkLoggedIn } = useContext(AuthContext);
+  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
 
-
-  // useEffect(() => {
-  //   if (isLoggedIn()) {
-  //     setLoggedIn(true);
-  //   }
-  // }, [loggedIn]);
-
-  useEffect(() => {
-    if (checkLoggedIn()) {
-      //setProfileUsername(loggedInUsername);
-      setSignedIn(true);
-    } else {
-      setSignedIn(false);
-    }
-  }, []);
 
   const changePage = (page) => {
     setPageNumber(page);
   };
 
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (!checkLoggedIn()) {
+      navigate("/dashboard");
+    }
+  }, []);
+
+
   return (
     <>
-      {signedIn ? <NavbarDashboard /> : <Navbar />}
+      <NavbarDashboard />
       <div className="dashboard">
         <Blogs
           setPageNumber={setPageNumber}
           setPageSize={setPageSize}
           setBlogCount={setBlogCount}
         />
+
         <div
           style={{
             display: "flex",

@@ -1,22 +1,15 @@
-
-
-.blogUserOptions {
-    background-color: #5B3203 !important;
-    border-bottom: 1px solid #5B3203;
+.dashboard {
+    padding: '3rem';
 }
 
+
 .blogCards {
-    background-color: #f6f9f9;
+    background-color: #f3f0e1;
     border-radius: 10px;
     padding: 0.5rem 1.5rem;
     margin-bottom: 1rem;
 }
 
-.moreOrLess {
-    background-color: transparent;
-    border: none;
-    font-size: medium;
-    color: #5B3203;
-    font-weight: 700;
-    font-family: 'Poppins', sans-serif;
+.align{
+    text-align: center;
 }

@@ -8,9 +8,9 @@ import Homepage from './pages/Jsx/homepage';
 import Profile from './pages/Jsx/profile';
 import CreateBlog from './pages/Jsx/createBlog';
 import Users from './pages/Jsx/registeredusers';
-import OwnBlogs from './pages/Jsx/blogListByAuthor';
+import MyBlogs from './pages/Jsx/ownBlogs';
 import EditBlog from './pages/Jsx/editBlog';
-
+import FullBlog from './pages/Jsx/fullBlog';
 
 
 
@@ -23,13 +23,15 @@ function App() {
         <Route path="/register" element={<Register />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/dashboard" element={<Dashboard />}/>
+        <Route path="/dashboard/:pagenumber" element={<Dashboard />}/>
+
         <Route path="/" element={<Homepage />}/>
         <Route path="/profile" element={<Profile />}/>
         <Route path="/registeredusers" element={<Users />}/>
         <Route path="/create" element={<CreateBlog />}/>
-        <Route path="/myblogs" element={<OwnBlogs />}/>
+        <Route path="/myblogs" element={<MyBlogs />}/>
         <Route path="/editblog" element={<EditBlog />}/>
-
+        <Route path="/fullblog" element={<FullBlog />}/>
 
 
       </Routes>

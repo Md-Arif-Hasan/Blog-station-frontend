@@ -1,25 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import { register } from "../../services/authentication";
 import "../Styles/register.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Jsx/Navbar";
+//import { isLoggedIn } from "../../services/loggedIn";
+import { AuthContext } from "../../contexts/contexts";
+import { useContext } from "react";
 
 export default function Form() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //const [loggedIn, setLoggedIn] = useState(false);
+  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
 
+  
   const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
-
   const [errorUsername, setErrorUsername] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
-
   const [errorLineUsername, setErrorLineUsername] = useState("");
   const [errorLineEmail, setErrorLineEmail] = useState("");
   const [errorLinePassword, setErrorLinePassword] = useState("");
 
   const navigate = useNavigate();
+
+
+  // useEffect(() => {
+  //   if (isLoggedIn()) {
+  //     setLoggedIn(true);
+  //     navigate("/dashboard");
+  //   }
+  // }, [loggedIn]);
+
+
+  useEffect(() => {
+    if(checkLoggedIn()){
+        navigate("/dashboard");
+    }
+}, []);
+
+
 
   const submit = async (e) => {
     e.preventDefault();
@@ -112,12 +134,13 @@ export default function Form() {
 
   return (
     <>
+      <Navbar />
       <div className="page">
         <div className="image">
           <img
             className="logo"
-            style={{ width: "120px", height: "auto" }}
-            src="src\assets\man.png"
+            style={{ width: "120px", height: "auto", marginTop: "2rem" }}
+            src="src\assets\registered.png"
           />
         </div>
 
@@ -130,8 +153,8 @@ export default function Form() {
               onChange={(e) => setUsername(e.target.value)}
               label="Username"
               variant="outlined"
-              error={errorUsername} helperText={errorLineUsername}
-
+              error={errorUsername}
+              helperText={errorLineUsername}
             />
 
             <TextField
@@ -141,7 +164,8 @@ export default function Form() {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               variant="outlined"
-              error={errorEmail} helperText={errorLineEmail}
+              error={errorEmail}
+              helperText={errorLineEmail}
             />
 
             <TextField
@@ -152,11 +176,11 @@ export default function Form() {
               value={password}
               label="Password"
               variant="outlined"
-              error={errorPassword} helperText={errorLinePassword}
+              error={errorPassword}
+              helperText={errorLinePassword}
             />
 
             <Button className="button" onClick={submit} variant="contained">
-              
               Register
             </Button>
 

@@ -2,12 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { TextField, Button } from "@mui/material";
-import "../Styles/profile.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
-import { editBlog } from "../../services/blogList";
 import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
 
 function BLogInfo() {
@@ -19,69 +16,17 @@ function BLogInfo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
-
-  const [errorTitle, setErrorTitle] = useState(false);
-  const [errorDescription, setErrorDescription] = useState(false);
-
-  const [errorLineTitle, setErrorLineTitle] = useState("");
-  const [errorLineDescription, setErrorLineDescription] = useState("");
-
   useEffect(() => {
     const data = location.state;
 
-    setTitle(data.title);
-    setDescription(data.description);
-    setBlogid(data.id);
+    if (data) {
+      console.log(data);
+
+      setTitle(data.title);
+      setDescription(data.description);
+      setBlogid(data.id);
+    }
   }, []);
-
-  async function getBlogDetails() {
-    const newBlog = {
-      title: title,
-      description: description,
-    };
-
-    if (validateTitle(title) && validateDescription(description)) {
-      try {
-        let details = await editBlog(blogId, newBlog);
-
-        console.log(details.status);
-
-        if (details.status === 200) {
-          setBlogDetails(details.data);
-          navigate("/myblogs");
-        } else {
-          setErrorOrSuccessLine(response.data.message);
-          console.log(response.data);
-        }
-      } catch (err) {
-        console.log("An error occured!");
-        setErrorOrSuccessLine("An error occured");
-      }
-    }
-  }
-
-  const validateTitle = (value) => {
-    if (value === "") {
-      setErrorTitle(true);
-      setErrorLineTitle("\u{26A0} Title is required");
-      return false;
-    }
-    setErrorTitle(false);
-    setErrorLineTitle("");
-    return true;
-  };
-
-  const validateDescription = (value) => {
-    if (value === "") {
-      setErrorDescription(true);
-      setErrorLineDescription("\u{26A0} Description is required");
-      return false;
-    }
-    setErrorDescription(false);
-    setErrorLineDescription("");
-    return true;
-  };
 
   return (
     <div className="userInfoWrapper">
@@ -96,10 +41,7 @@ function BLogInfo() {
                 variant="outlined"
                 InputLabelProps={{ shrink: false }}
                 value={title}
-                onChange={(e) => setTitle(e.target.value)}
                 style={{ width: "70%" }}
-                error={errorTitle}
-                helperText={errorLineTitle}
               />
             </div>
             <div className="individual">
@@ -108,23 +50,52 @@ function BLogInfo() {
                 id="description"
                 label={description === "" ? "Description" : ""}
                 variant="outlined"
-                InputLabelProps={{ shrink: false }}
                 value={description}
                 multiline
-                maxRows={20}
-                minRows={20}
-                onChange={(e) => setDescription(e.target.value)}
+                maxRows={15}
+                minRows={15}
                 style={{ width: "70%" }}
-                error={errorDescription}
-                helperText={errorLineDescription}
               />
             </div>
           </form>
         </div>
         <hr style={{ border: "1px solid #e0d8c3" }} />
-        <Button className="button" onClick={getBlogDetails} variant="contained">
-          Update
-        </Button>
+
+        {/* <Button
+                className="button"
+                onClick={() => navigate("/myblogs")}
+                variant="outlined"
+              >
+                Cancel
+              </Button>     */}
+
+        <h4>
+          <a
+            href="/dashboard"
+            style={{
+              fontSize: "16px",
+              color: "#863812",
+              textDecoration: "none",
+              marginBottom: "2rem",
+            }}
+          >
+            ← Go back to Dashboard
+          </a>
+        </h4>
+
+        <h4>
+          <a
+            href="/myblogs"
+            style={{
+              fontSize: "16px",
+              color: "#863812",
+              textDecoration: "none",
+              marginBottom: "2rem",
+            }}
+          >
+            ← Go back to my blogs
+          </a>
+        </h4>
       </div>
     </div>
   );

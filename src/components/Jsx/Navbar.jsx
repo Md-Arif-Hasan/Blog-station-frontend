@@ -15,9 +15,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 
-import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
-
 function ResponsiveAppBar() {
   const navigate = useNavigate();
 
@@ -37,18 +34,6 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-  };
-
-  let cookie = Cookies.get("jwt");
-  let { username } = jwt_decode(cookie);
-
-  const logoutUser = async () => {
-    try {
-      Cookies.remove("jwt");
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -108,10 +93,10 @@ function ResponsiveAppBar() {
                   textAlign="left"
                   variant="body1"
                   sx={{ padding: 0, fontSize: "14px" }}
-                  onClick={(e) => navigate("/dashboard")}
+                  onClick={(e) => navigate("/register")}
                 >
                   {" "}
-                  Blogs
+                  Register
                 </Typography>
               </MenuItem>
               <Divider />
@@ -119,9 +104,9 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/registeredusers")}
+                  onClick={(e) => navigate("/login")}
                 >
-                  Authors
+                  Login
                 </Typography>
               </MenuItem>
 
@@ -129,9 +114,9 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/create")}
+                  onClick={(e) => navigate("/dashboard")}
                 >
-                  Create Blog
+                  Dashboard
                 </Typography>
               </MenuItem>
             </Menu>
@@ -157,100 +142,25 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
-              onClick={(e) => navigate("/registeredusers")}
+              onClick={(e) => navigate("/register")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Authors
+              Register
+            </Button>
+
+            <Button
+              onClick={(e) => navigate("/login")}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Login
             </Button>
 
             <Button
               onClick={(e) => navigate("/dashboard")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Blogs
+              Dashboard
             </Button>
-
-            <Button
-              onClick={(e) => navigate("/create")}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Create Blog
-            </Button>
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/src/assets/man.png" />
-              </IconButton>
-            </Tooltip>
-
-            <Typography
-              textAlign="center"
-              variant="body1"
-              sx={{ padding: 0, fontSize: "14px" }}
-              onClick={(e) => navigate("/profile")}
-            >
-              <b> {username}</b>
-            </Typography>
-
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography
-                  textAlign="left"
-                  variant="body1"
-                  sx={{ padding: 0, fontSize: "14px" }}
-                  onClick={(e) => navigate("/dashboard")}
-                >
-                  <b> Dashboard</b>
-                </Typography>
-              </MenuItem>
-              <Divider />
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography
-                  textAlign="center"
-                  sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/profile")}
-                >
-                  Profile
-                </Typography>
-              </MenuItem>
-
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography
-                  textAlign="center"
-                  sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/myblogs")}
-                >
-                  My Blogs
-                </Typography>
-              </MenuItem>
-
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Typography
-                  textAlign="center"
-                  sx={{ padding: 0 }}
-                  onClick={(e) => logoutUser()}
-                >
-                  Logout
-                </Typography>
-              </MenuItem>
-            </Menu>
           </Box>
         </Toolbar>
       </Container>

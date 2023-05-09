@@ -4,12 +4,16 @@ import App from './App'
 import { StyledEngineProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css'
+import { AuthProvider } from './contexts/contexts';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <StyledEngineProvider injectFirst>
-        <App />
+      <AuthProvider>
+          <App />
+        </AuthProvider>
       </StyledEngineProvider>
     </BrowserRouter>
   </React.StrictMode>

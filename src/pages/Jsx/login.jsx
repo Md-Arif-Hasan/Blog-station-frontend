@@ -3,12 +3,19 @@ import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
 import "../Styles/login.css";
+import Navbar from "../../components/Jsx/Navbar";
+//import { isLoggedIn } from "../../services/loggedIn";
+import { AuthContext } from "../../contexts/contexts";
+import { useContext } from "react";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [status, setStatus] = useState("");
+ // const [loggedIn, setLoggedIn] = useState(false);
+  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
+
 
   const navigate = useNavigate();
 
@@ -41,6 +48,23 @@ export default function Login() {
     }
   };
 
+
+  // useEffect(() => {
+  //   if (isLoggedIn()) {
+  //     setLoggedIn(true);
+  //     navigate("/dashboard");
+  //   }
+  // }, [loggedIn]);
+
+
+  useEffect(() => {
+    if(checkLoggedIn()){
+        navigate("/dashboard");
+    }
+}, []);
+
+
+  
   const loginStatus = () => {
     return (
       <div
@@ -54,18 +78,19 @@ export default function Login() {
 
   return (
     <>
+      <Navbar />
       <div className="page">
         <div className="image">
           <img
             className="logo"
-            style={{ width: "120px", height: "auto" }}
-            src="src\assets\man.png"
+            style={{ width: "120px", height: "auto", marginTop: "3rem" }}
+            src="src\assets\account.png"
           />
         </div>
 
         <div className="messages">{loginStatus()}</div>
 
-        <div className="form">
+        <div className="loginForm">
           <form>
             <TextField
               id="username"
@@ -106,49 +131,3 @@ export default function Login() {
     </>
   );
 }
-
-//     return(
-//         <>
-//         <ToastContainer />
-//         <div className="wrapper">
-//             <img className="logoRaw" src="src\assets\react.svg" />
-//             <h1>Blog Station!</h1>
-//             <h3> Welcome</h3>
-//             <div className="loginForm">
-//             <div className="messages">
-//                 {loginStatus()}
-// 	        </div>
-//             <form>
-//                 <TextField
-//                 id="username"
-//                 label="Username"
-//                 variant="standard"
-//                 value={username}
-//                 type="text"
-//                 className="input"
-//                 onChange={(e)=>setUsername(e.target.value)}
-//                 />
-//                 <TextField
-//                 id="password"
-//                 label="Password"
-//                 variant="standard"
-//                 value={password}
-//                 type="password"
-//                 className="input"
-//                 onChange={(e)=>setPassword(e.target.value)}
-//                 />
-//                 <Button
-//                 variant="contained" disableElevation
-//                 type="submit"
-//                 className="submit"
-//                 onClick={submit}
-//                 >
-//                 Login
-//                 </Button>
-// 		        <h4 className="registerLine">Don't have an account?<span><a href="/register" className="signUp"> Sign Up</a></span></h4>
-//             </form>
-//             </div>
-//         </div>
-//         </>
-//     )
-// }

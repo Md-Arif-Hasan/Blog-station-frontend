@@ -1,13 +1,23 @@
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+ import Button from "@mui/material/Button";
 
-import { getAllBlogs} from "../../services/blogList";
+ import Alert from "../../components/Jsx/dialog";
 
-import "../Styles/blogs.css";
+
+import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
+import { getUserByUsername } from "../../services/user";
+import { getAllBlogsByAuthorId, deleteBlog} from "../../services/blogList";
+
+
+
+// import "../Styles/blogs.css";
 
 function formatTimestamp(timestamp) {
   const options = {
@@ -28,10 +38,17 @@ function formatTimestamp(timestamp) {
 }
 
 
+
+
+
+
 function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
   const [blogs, setBlogs] = useState(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+
+  const [authorId, setAuthorId] = useState("");
+  const [username, setUsername] = useState("");
 
 
   useEffect(() => {
@@ -41,16 +58,26 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
     if(pgNo && pgNo!== 'null') setPageNumber(pgNo);
     if(pgSize && pgSize!== 'null') setPageSize(pgSize);
 
-    fetchAllBlogs(pgNo, pgSize);
-  }, [blogAdded, searchParams]);
 
-  const fetchAllBlogs = async (pageNumber, pageSize) => {
+    async function getUser() {
+            let cookie = Cookies.get("jwt");
+            let { username } = jwt_decode(cookie);
+      
+            const user = await getUserByUsername(username);
+            setAuthorId(user.data.id);
+            console.log(user.data.id);
+            await BlogsByAuthorId(user.data.id, pgNo, pgSize);
+          }
+          getUser();
+
+  }, [ blogAdded, searchParams, username]);
+
+
+
+  const BlogsByAuthorId = async (authorId, pageNumber, pageSize) => {
     let allBlogs = null;
+      allBlogs = await getAllBlogsByAuthorId(authorId, pageNumber, pageSize);
 
-      allBlogs = await getAllBlogs(pageNumber, pageSize);
-     console.log(allBlogs);
-
-  
     if(typeof(allBlogs) === 'object'){
       setBlogs(allBlogs.data.rows);
       setBlogCount(allBlogs.data.count);
@@ -58,6 +85,16 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
       setBlogs(null);
       setBlogCount(0);
     }
+  }
+
+
+    const deleteBlogs = async (blogId) => {
+    const response = await deleteBlog(blogId);
+    console.log(response.data);
+    if(response.status === 200){
+        console.log("Blog deleted!")
+    }
+    await BlogsByAuthorId(authorId,1, 5);
   }
 
 
@@ -100,7 +137,28 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
               {item.description}
             </div>
           </CardContent>
+
+
+
+
+            <Button
+              size="small"
+              disableElevation
+              variant="contained"
+              style={{
+                backgroundColor: "#863812",
+                marginRight: "0.5rem",
+                marginBottom: "0.5rem",
+              }}
+              onClick={(e) => navigate('/editblog', {state:item})}
+            >
+              Edit
+            </Button>
+
+          <Alert submit={()=>deleteBlogs(item.id)}/>
+
         </Card>
+        
       ))}
     </>
   );
@@ -119,3 +177,5 @@ export default function BlogList({blogAdded, setPageNumber, setPageSize, setBlog
         <AllBlogs blogAdded={blogAdded} setPageNumber={setPageNumber}  setPageSize={setPageSize}  setBlogCount= {setBlogCount}/>
   );
 }
+
+
