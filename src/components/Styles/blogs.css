@@ -22,3 +22,11 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+
+.notFound{
+    font-family: 'Poppins', sans-serif;
+    color: #4e2c06;
+    font-size: 2.7rem;
+    margin: 20rem;
+}

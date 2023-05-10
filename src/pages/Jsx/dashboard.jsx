@@ -7,10 +7,8 @@ import { AuthContext } from "../../contexts/contexts";
 
 import Blogs from "../../components/Jsx/blogs";
 import "../Styles/dashboard.css";
-//import { isLoggedIn } from "../../services/loggedIn";
 
 export default function Dashboard() {
-  //const [loggedIn, setLoggedIn] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
 
   const [blogCount, setBlogCount] = useState(0);
@@ -20,15 +18,9 @@ export default function Dashboard() {
   const { checkLoggedIn } = useContext(AuthContext);
 
 
-  // useEffect(() => {
-  //   if (isLoggedIn()) {
-  //     setLoggedIn(true);
-  //   }
-  // }, [loggedIn]);
 
   useEffect(() => {
     if (checkLoggedIn()) {
-      //setProfileUsername(loggedInUsername);
       setSignedIn(true);
     } else {
       setSignedIn(false);

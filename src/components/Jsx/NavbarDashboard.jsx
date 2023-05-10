@@ -1,5 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
+import { useState, useEffect } from "react"
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -15,14 +16,20 @@ import AdbIcon from "@mui/icons-material/Adb";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 
-import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/contexts";
+
+ import Cookies from "js-cookie";
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { loggedInUsername } = useContext(AuthContext);
+  const [username, setUsername] = useState(loggedInUsername);
+ 
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,8 +46,6 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  let cookie = Cookies.get("jwt");
-  let { username } = jwt_decode(cookie);
 
   const logoutUser = async () => {
     try {
@@ -81,7 +86,7 @@ function ResponsiveAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="navbar navbar-dark bg-dark"
             >
               <MenuIcon />
             </IconButton>
@@ -129,7 +134,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/create")}
+                  onClick={(e) => navigate("/blogs/create")}
                 >
                   Create Blog
                 </Typography>
@@ -171,7 +176,7 @@ function ResponsiveAppBar() {
             </Button>
 
             <Button
-              onClick={(e) => navigate("/create")}
+              onClick={(e) => navigate("/blogs/create")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Create Blog
@@ -235,7 +240,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/myblogs")}
+                  onClick={(e) => navigate(`/blogs/users/${username}`)}
                 >
                   My Blogs
                 </Typography>

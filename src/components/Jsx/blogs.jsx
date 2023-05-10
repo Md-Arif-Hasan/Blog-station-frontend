@@ -68,8 +68,6 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
       {blogs.map((item) => (
         <Card className="blogCards" key={item.id}>
           <CardContent style={{ overflowWrap: "break-word" }}>
-
-    
            
             <Typography
               variant="h5"
@@ -80,7 +78,7 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
                 color: "#863812",
               }}
             >
-               <a href="/fullblog"  onClick={(e) => navigate('/fullblog', {state:item})}> {item.title} </a>
+                <a onClick={(e) => navigate(`/blogs/${item.id}`, {state:item})}> {item.title} </a>
             </Typography>
 
             <Typography
@@ -107,7 +105,7 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
   } 
     return (
       <>
-      <h1>Sorry! No blog found</h1>
+      <h1 className="notFound">No blog found</h1>
       </>
     )
   

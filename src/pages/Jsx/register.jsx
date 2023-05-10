@@ -4,7 +4,6 @@ import { register } from "../../services/authentication";
 import "../Styles/register.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Jsx/Navbar";
-//import { isLoggedIn } from "../../services/loggedIn";
 import { AuthContext } from "../../contexts/contexts";
 import { useContext } from "react";
 
@@ -12,8 +11,8 @@ export default function Form() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [loggedIn, setLoggedIn] = useState(false);
-  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
+
+  const { checkLoggedIn } = useContext(AuthContext);
 
   
   const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
@@ -26,13 +25,6 @@ export default function Form() {
 
   const navigate = useNavigate();
 
-
-  // useEffect(() => {
-  //   if (isLoggedIn()) {
-  //     setLoggedIn(true);
-  //     navigate("/dashboard");
-  //   }
-  // }, [loggedIn]);
 
 
   useEffect(() => {
@@ -60,15 +52,18 @@ export default function Form() {
         const response = await register(newUser);
         console.log(response.data);
 
+        console.log("regggggggg")
+
         if (response.data.status === 201) {
           setErrorOrSuccessLine(
             "User successfully registered! Please go to the login section"
           );
           console.log(response.data);
-          navigate("/login");
+          console.log("if");
+          navigate("/dashboard");
         } else {
           setErrorOrSuccessLine(response.data.message);
-          console.log(response.data);
+          console.log("ëlse");
         }
       } catch (err) {
         console.log("An error occured!");

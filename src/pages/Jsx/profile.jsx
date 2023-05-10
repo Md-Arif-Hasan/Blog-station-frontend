@@ -4,8 +4,6 @@ import Toolbar from "@mui/material/Toolbar";
 import { TextField, Button } from "@mui/material";
 import "../Styles/profile.css";
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { getUserByUsername, updateUserByUsername } from "../../services/user";
 import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
@@ -22,7 +20,8 @@ function UserInfo() {
   const [errorLinePassword, setErrorLinePassword] = useState("");
   const [errorOldPassword, setErrorOldPassword] = useState(false);
   const [errorLineOldPassword, setErrorLineOldPassword] = useState("");
-  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
+  const { checkLoggedIn, loggedInUsername } = useContext(AuthContext);
+
 
   const [disableSave, setDisableSave] = useState(true);
   const navigate = useNavigate();
@@ -60,16 +59,13 @@ function UserInfo() {
   }, []);
 
   useEffect(() => {
-    let cookie = Cookies.get("jwt");
-    let { username } = jwt_decode(cookie);
 
     async function getUserDetails() {
-      let details = await getUserByUsername(username);
+      let details = await getUserByUsername(loggedInUsername);
       setUserDetails(details.data);
       setUsername(details.data.username);
       setEmail(details.data.email);
     }
-
     if (password.length === 0) {
       setDisableSave(true);
     } else {

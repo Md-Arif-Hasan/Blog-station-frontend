@@ -30,6 +30,12 @@ export default function Form() {
 
 
   const submit = async (e) => {
+
+    if (!checkLoggedIn()) {
+      navigate("/dashboard");
+    }
+
+    
     e.preventDefault();
     if (validateTitle(title) && validateDescription(description)) {
       const newBlog = {
@@ -86,11 +92,12 @@ export default function Form() {
     <>
       <NavbarDashboard />
       <div className="page">
+
         <div className="image">
           <img
             className="logo"
             style={{ width: "120px", height: "auto" }}
-            src="src\assets\blogging.png"
+            src="/src/assets/blogging.png" 
           />
         </div>
 

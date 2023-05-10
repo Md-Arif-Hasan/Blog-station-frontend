@@ -1,11 +1,19 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+
 import { TextField, Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/contexts";
+
 
 function BLogInfo() {
   const [details, setBlogDetails] = useState("");
@@ -15,6 +23,10 @@ function BLogInfo() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+    const { loggedInUsername } = useContext(AuthContext);
+  const [username, setUsername] = useState(loggedInUsername);
+
+
 
   useEffect(() => {
     const data = location.state;
@@ -30,50 +42,50 @@ function BLogInfo() {
 
   return (
     <div className="userInfoWrapper">
-      <div className="info">
+      <div>
         <div className="infoForm">
-          <form>
-            <div className="individual">
-              <h4>Title</h4>
-              <TextField
-                id="title"
-                label={title === "" ? "Title" : ""}
-                variant="outlined"
-                InputLabelProps={{ shrink: false }}
-                value={title}
-                style={{ width: "70%" }}
-              />
-            </div>
-            <div className="individual">
-              <h4>Description</h4>
-              <TextField
-                id="description"
-                label={description === "" ? "Description" : ""}
-                variant="outlined"
-                value={description}
-                multiline
-                maxRows={15}
-                minRows={15}
-                style={{ width: "70%" }}
-              />
-            </div>
-          </form>
+ 
+          <Card className="blogCards">
+          <CardContent style={{ overflowWrap: "break-word" }}>
+           
+
+          <hr style={{ border: "10px solid #e0d8c3" }} />
+
+            <Typography
+              variant="h5"
+              component="div"
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: "bold",
+                color: "#863812",
+              }}
+            >
+              {title}
+            </Typography>
+
+            <hr style={{ border: "10px solid #e0d8c3" }} />
+
+            <Typography
+              variant="h5"
+              component="div"
+              style={{
+                fontFamily: "Poppins",
+                fontWeight: "italic",
+                color: "#25383C",
+              }}
+            >
+               {description}
+            </Typography>
+
+          </CardContent>
+        </Card>
         </div>
-        <hr style={{ border: "1px solid #e0d8c3" }} />
-
-        {/* <Button
-                className="button"
-                onClick={() => navigate("/myblogs")}
-                variant="outlined"
-              >
-                Cancel
-              </Button>     */}
-
+        <hr style={{ border: "3px solid #e0d8c3" }} />
         <h4>
           <a
             href="/dashboard"
             style={{
-              fontSize: "16px",
+              fontSize: "27px",
               color: "#863812",
               textDecoration: "none",
               marginBottom: "2rem",
@@ -85,9 +97,9 @@ function BLogInfo() {
 
         <h4>
           <a
-            href="/myblogs"
+            onClick={(e) => navigate(`/blogs/users/${username}`)}
             style={{
-              fontSize: "16px",
+              fontSize: "27px",
               color: "#863812",
               textDecoration: "none",
               marginBottom: "2rem",

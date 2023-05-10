@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
 import "../Styles/login.css";
 import Navbar from "../../components/Jsx/Navbar";
-//import { isLoggedIn } from "../../services/loggedIn";
 import { AuthContext } from "../../contexts/contexts";
 import { useContext } from "react";
 
@@ -13,7 +12,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [status, setStatus] = useState("");
- // const [loggedIn, setLoggedIn] = useState(false);
   const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
 
 
@@ -47,15 +45,6 @@ export default function Login() {
       setStatus("Please enter your username and password");
     }
   };
-
-
-  // useEffect(() => {
-  //   if (isLoggedIn()) {
-  //     setLoggedIn(true);
-  //     navigate("/dashboard");
-  //   }
-  // }, [loggedIn]);
-
 
   useEffect(() => {
     if(checkLoggedIn()){

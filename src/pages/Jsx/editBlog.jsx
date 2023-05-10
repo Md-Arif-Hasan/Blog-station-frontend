@@ -7,6 +7,9 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/contexts";
+
 import { editBlog } from "../../services/blogList";
 import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
 
@@ -18,6 +21,10 @@ function BLogInfo() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+
+  const { loggedInUsername } = useContext(AuthContext);
+  const [username, setUsername] = useState(loggedInUsername);
+ 
 
   const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
 
@@ -35,6 +42,7 @@ function BLogInfo() {
     setBlogid(data.id);
   }, []);
 
+
   async function getBlogDetails() {
     const newBlog = {
       title: title,
@@ -49,7 +57,7 @@ function BLogInfo() {
 
         if (details.status === 200) {
           setBlogDetails(details.data);
-          navigate("/myblogs");
+          navigate(`/blogs/users/${username}`);
         } else {
           setErrorOrSuccessLine(response.data.message);
           console.log(response.data);
@@ -122,8 +130,14 @@ function BLogInfo() {
           </form>
         </div>
         <hr style={{ border: "1px solid #e0d8c3" }} />
-        <Button className="button" onClick={getBlogDetails} variant="contained">
-          Update
+
+      <Button
+        
+          variant="contained"
+          className="save"
+          onClick={(e) => getBlogDetails()}
+        >
+          Update Blog
         </Button>
       </div>
     </div>

@@ -8,13 +8,16 @@ export default function Home() {
     <>
       <Navbar />
 
-      <div className="container"  style={{ padding: "1rem 4rem 1.5rem" }}>
-        <h1 >Blog Station</h1>
-        <h1>
-        “Blogging is a simple way through which you can share extraordinary ideas.”
-        </h1>
-       <h1><a href="./login">Login & Start your journey with us!</a>  </h1> 
-      </div>
+      <div className="container"  style={{ padding: "1rem 4rem 1.5rem" }}></div>
+        <div className="right">
+          <h1 className="title">Blog Station</h1>
+          <h2 className="quote">
+          “Blogging is a simple way through<br /> which you can share extraordinary ideas.”
+          </h2>
+          <a href="./login" className="goToLogin">Login & Start your journey with us!</a>
+        </div>
+        
+      {/* </div> */}
     </>
   );
 }

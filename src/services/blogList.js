@@ -11,15 +11,6 @@ const getAllBlogs = async (pageNumber) => {
   }
 };
 
-// const getBlogsByAuthorId = async (authorId) => {
-//   try {
-//     const response = await api.get("/blog/author/" + authorId);
-//     return response;
-//   } catch (err) {
-//     return err.response;
-//   }
-// };
-
 
 const getAllBlogsByAuthorId = async (authorId, pageNumber) => {
     try {

@@ -8,16 +8,12 @@ import { useNavigate } from 'react-router-dom';
  import Button from "@mui/material/Button";
 
  import Alert from "../../components/Jsx/dialog";
+ import { AuthContext } from "../../contexts/contexts";
+ import { useContext } from "react";
 
-
-import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
 import { getUserByUsername } from "../../services/user";
 import { getAllBlogsByAuthorId, deleteBlog} from "../../services/blogList";
 
-
-
-// import "../Styles/blogs.css";
 
 function formatTimestamp(timestamp) {
   const options = {
@@ -49,10 +45,15 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
 
   const [authorId, setAuthorId] = useState("");
   const [username, setUsername] = useState("");
+  const { checkLoggedIn, loggedInUsername } = useContext(AuthContext);
 
 
   useEffect(() => {
 
+
+    if (!checkLoggedIn()) {
+      navigate("/dashboard");
+    }
     const pgNo = searchParams.get('pageNo');
     const pgSize = searchParams.get('pageSize');
     if(pgNo && pgNo!== 'null') setPageNumber(pgNo);
@@ -60,12 +61,9 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
 
 
     async function getUser() {
-            let cookie = Cookies.get("jwt");
-            let { username } = jwt_decode(cookie);
-      
-            const user = await getUserByUsername(username);
+            const user = await getUserByUsername(loggedInUsername);
             setAuthorId(user.data.id);
-            console.log(user.data.id);
+            setUsername(user.data.username)
             await BlogsByAuthorId(user.data.id, pgNo, pgSize);
           }
           getUser();
@@ -117,7 +115,7 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
                 color: "#863812",
               }}
             >
-               <a href="/fullblog"  onClick={(e) => navigate('/fullblog', {state:item})}> {item.title} </a>
+               <a onClick={(e) => navigate(`/blogs/${item.id}`, {state:item})}> {item.title} </a>
             </Typography>
 
             <Typography
@@ -150,7 +148,7 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
                 marginRight: "0.5rem",
                 marginBottom: "0.5rem",
               }}
-              onClick={(e) => navigate('/editblog', {state:item})}
+              onClick={(e) => navigate(`/blogs/${item.id}/edit`, {state:item})}
             >
               Edit
             </Button>

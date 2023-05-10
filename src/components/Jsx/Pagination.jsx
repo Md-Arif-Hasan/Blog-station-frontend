@@ -33,6 +33,7 @@ export default function BasicPagination({
     changePage(value);
   };
 
+  if( blogCount ){
   return (
     <Stack spacing={2} style={{ display: "flex" }}>
       <Pagination
@@ -45,4 +46,6 @@ export default function BasicPagination({
       />
     </Stack>
   );
+  }
+  return ( <></> )
 }

@@ -16,7 +16,6 @@ import FullBlog from './pages/Jsx/fullBlog';
 
 
 function App() {
-
   return (
     <>
       <Routes>
@@ -28,10 +27,10 @@ function App() {
         <Route path="/" element={<Homepage />}/>
         <Route path="/profile" element={<Profile />}/>
         <Route path="/registeredusers" element={<Users />}/>
-        <Route path="/create" element={<CreateBlog />}/>
-        <Route path="/myblogs" element={<MyBlogs />}/>
-        <Route path="/editblog" element={<EditBlog />}/>
-        <Route path="/fullblog" element={<FullBlog />}/>
+        <Route path="/blogs/create" element={<CreateBlog />}/>
+        <Route path="/blogs/users/:username" element={<MyBlogs />}/>
+        <Route path="/blogs/:blogId/edit" element={<EditBlog />}/>
+        <Route path="/blogs/:blogId" element={<FullBlog />}/>
 
 
       </Routes>
