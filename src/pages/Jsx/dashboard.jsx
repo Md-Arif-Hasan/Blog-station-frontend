@@ -20,7 +20,7 @@ export default function Dashboard() {
     } else {
       setSignedIn(false);
     }
-  }, []);
+  },[]);
 
   const changePage = (page) => {
     setPageNumber(page);

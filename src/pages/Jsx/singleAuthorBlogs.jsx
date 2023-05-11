@@ -3,16 +3,13 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 import Alert from "../../components/Jsx/dialog";
 import { AuthContext } from "../../contexts/contexts";
 import { useContext } from "react";
 import { getUserByUsername } from "../../services/user";
-import { getAllBlogsByAuthorId, deleteBlog} from "../../services/blogList";
-
+import { getAllBlogsByAuthorId, deleteBlog } from "../../services/blogList";
 
 function formatTimestamp(timestamp) {
   const options = {
@@ -32,7 +29,7 @@ function formatTimestamp(timestamp) {
   );
 }
 
-function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
+function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   const [blogs, setBlogs] = useState(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -44,56 +41,47 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
     if (!checkLoggedIn()) {
       navigate("/dashboard");
     }
-    const pgNo = searchParams.get('pageNo');
-    const pgSize = searchParams.get('pageSize');
-    if(pgNo && pgNo!== 'null') setPageNumber(pgNo);
-    if(pgSize && pgSize!== 'null') setPageSize(pgSize);
+    const pgNo = searchParams.get("pageNo");
+    const pgSize = searchParams.get("pageSize");
+    if (pgNo && pgNo !== "null") setPageNumber(pgNo);
+    if (pgSize && pgSize !== "null") setPageSize(pgSize);
     async function getUser() {
-            const user = await getUserByUsername(loggedInUsername);
-            setAuthorId(user.data.id);
-            setUsername(user.data.username)
-            await BlogsByAuthorId(user.data.id, pgNo, pgSize);
-          }
-          getUser();
-
-  }, [ blogAdded, searchParams, username]);
+      const user = await getUserByUsername(loggedInUsername);
+      setAuthorId(user.data.id);
+      setUsername(user.data.username);
+      await BlogsByAuthorId(user.data.id, pgNo, pgSize);
+    }
+    getUser();
+  }, [blogAdded, searchParams, username]);
 
   const BlogsByAuthorId = async (authorId, pageNumber, pageSize) => {
     let allBlogs = null;
-      allBlogs = await getAllBlogsByAuthorId(authorId, pageNumber, pageSize);
+    allBlogs = await getAllBlogsByAuthorId(authorId, pageNumber, pageSize);
 
-    if(typeof(allBlogs) === 'object'){
+    if (typeof allBlogs === "object") {
       setBlogs(allBlogs.data.rows);
       setBlogCount(allBlogs.data.count);
     } else {
       setBlogs(null);
       setBlogCount(0);
     }
-  }
+  };
 
   const deleteBlogs = async (blogId) => {
-  const response = await deleteBlog(blogId);
-  console.log(response.data);
-  if(response.status === 200){
-        console.log("Blog deleted!")
+    const response = await deleteBlog(blogId);
+    console.log(response.data);
+    if (response.status === 200) {
+      console.log("Blog deleted!");
     }
-    await BlogsByAuthorId(authorId,1, 5);
-  }
+    await BlogsByAuthorId(authorId, 1, 5);
+  };
 
-  if(!blogs)
+  if (!blogs)
     return (
       <>
-      <h1 className="notFound">No blog found</h1>
+        <h1 className="notFound">No blog found</h1>
       </>
-    )
-    
-    if(blogs.size === 0 )
-    return (
-      <Box sx={{ display: 'flex' }}>
-        <CircularProgress />
-      </Box>
     );
-    
   return (
     <>
       {blogs.map((item) => (
@@ -108,7 +96,12 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
                 color: "#863812",
               }}
             >
-            <a onClick={(e) => navigate(`/blogs/${item.id}`, {state:item})}> {item.title} </a>
+              <a
+                onClick={(e) => navigate(`/blogs/${item.id}`, { state: item })}
+              >
+                {" "}
+                {item.title}{" "}
+              </a>
             </Typography>
 
             <Typography
@@ -124,44 +117,58 @@ function AllBlogs({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
             </Typography>
 
             {formatTimestamp(item.updatedAt)}
-            <div className="description">
-              {item.description}
-            </div>
+            <div className="description">{item.description}</div>
           </CardContent>
-            <Button
-              size="small"
-              disableElevation
-              variant="contained"
-              style={{
-                backgroundColor: "#863812",
-                marginRight: "0.5rem",
-                marginBottom: "0.5rem",
-              }}
-              onClick={(e) => navigate(`/blogs/${item.id}/edit`, {state:item})}
-            >
-              Edit
-            </Button>
-
-            <Button variant="outlined" size="small"
-              disableElevation
-              style={{
-                marginRight: "0.5rem",
-                marginBottom: "0.5rem",
-              }} onClick={()=>setAlertOpen(true)} >
-              Delete
+          <Button
+            size="small"
+            disableElevation
+            variant="contained"
+            style={{
+              backgroundColor: "#863812",
+              marginRight: "0.5rem",
+              marginBottom: "0.5rem",
+            }}
+            onClick={(e) => navigate(`/blogs/${item.id}/edit`, { state: item })}
+          >
+            Edit
           </Button>
-          { alertOpen &&<Alert submit={()=>deleteBlogs(item.id)} close = {()=>setAlertOpen(false)}/>}
+
+          <Button
+            variant="outlined"
+            size="small"
+            disableElevation
+            style={{
+              marginRight: "0.5rem",
+              marginBottom: "0.5rem",
+            }}
+            onClick={() => setAlertOpen(true)}
+          >
+            Delete
+          </Button>
+          {alertOpen && (
+            <Alert
+              submit={() => deleteBlogs(item.id)}
+              close={() => setAlertOpen(false)}
+            />
+          )}
         </Card>
-        
       ))}
     </>
   );
 }
 
-export default function BlogList({blogAdded, setPageNumber, setPageSize, setBlogCount}) {
+export default function BlogList({
+  blogAdded,
+  setPageNumber,
+  setPageSize,
+  setBlogCount,
+}) {
   return (
-        <AllBlogs blogAdded={blogAdded} setPageNumber={setPageNumber}  setPageSize={setPageSize}  setBlogCount= {setBlogCount}/>
+    <AllBlogs
+      blogAdded={blogAdded}
+      setPageNumber={setPageNumber}
+      setPageSize={setPageSize}
+      setBlogCount={setBlogCount}
+    />
   );
 }
-
-

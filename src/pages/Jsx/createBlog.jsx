@@ -100,7 +100,6 @@ export default function Form() {
               error={errorTitle}
               helperText={errorLineTitle}
             />
-
             <TextField
               id="description"
               className="input"

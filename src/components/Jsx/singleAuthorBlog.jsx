@@ -1,9 +1,9 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import {useState } from "react";
+import { useState } from "react";
 import Button from "@mui/material/Button";
-import Alert from "../../components/Jsx/dialog";
+import Alert from "./dialog";
 
 function SingleBlog({ item }) {
   const [alertOpen, setAlertOpen] = useState(false);

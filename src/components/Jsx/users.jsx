@@ -52,25 +52,14 @@ function AllUsers() {
             <Grid container rowSpacing={0}>
               <Grid item xs={8}>
                 <ListItem style={{ height: "40px" }}>
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    style={{
-                      fontFamily: "Poppins",
-                      fontWeight: "bold",
-                      color: "#863812",
-                    }}
-                  >
-                    {item.fullName}
-                  </Typography>
                 </ListItem>
                 <ListItem style={{ height: "40px" }}>
                   <Typography
-                    sx={{ fontSize: 16, fontFamily: "Poppins" }}
+                    sx={{ fontSize: 25, fontFamily: "Poppins" }}
                     color="text.secondary"
                     gutterBottom
                   >
-                    {item.username}
+                   Username: {item.username}
                   </Typography>
                 </ListItem>
                 <ListItem>
@@ -83,7 +72,7 @@ function AllUsers() {
                 </ListItem>
               </Grid>
               <Grid item xs={4}>
-                <ListItem style={{ height: "50px" }}>
+                <ListItem style={{ height: "60px" }}>
                   {formatTimestamp(item.updatedAt, "update")}
                 </ListItem>
                 <ListItem style={{ height: "50px" }}>

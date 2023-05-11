@@ -29,7 +29,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   const [blogs, setBlogs] = useState(null);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const pgNo = searchParams.get("pageNo");
     const pgSize = searchParams.get("pageSize");

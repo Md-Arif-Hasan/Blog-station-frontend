@@ -4,7 +4,7 @@ import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
 import { AuthContext } from "../../contexts/contexts";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Blogs from "./singleAuthorBlogs";
+import OwnBlogs from "./singleAuthorBlogs";
 
 export default function Dashboard() {
   const [blogCount, setBlogCount] = useState(0);
@@ -26,7 +26,7 @@ export default function Dashboard() {
     <>
       <NavbarDashboard />
       <div className="dashboard">
-        <Blogs
+        <OwnBlogs
           setPageNumber={setPageNumber}
           setPageSize={setPageSize}
           setBlogCount={setBlogCount}

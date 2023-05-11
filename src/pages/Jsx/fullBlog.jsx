@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/contexts";
 
 function BLogInfo() {
   const [blogId, setBlogid] = useState("");
@@ -17,8 +15,6 @@ function BLogInfo() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const { loggedInUsername } = useContext(AuthContext);
-  const [username, setUsername] = useState(loggedInUsername);
 
   useEffect(() => {
     const data = location.state;
@@ -64,23 +60,10 @@ function BLogInfo() {
           </Card>
         </div>
         <hr style={{ border: "3px solid #e0d8c3" }} />
-        <h4>
-          <a
-            href="/dashboard"
-            style={{
-              fontSize: "27px",
-              color: "#863812",
-              textDecoration: "none",
-              marginBottom: "2rem",
-            }}
-          >
-            ← Go back to Dashboard
-          </a>
-        </h4>
 
         <h4>
           <a
-            onClick={(e) => navigate(`/blogs/users/${username}`)}
+            onClick={(e) => navigate(-1)}
             style={{
               fontSize: "27px",
               color: "#863812",
@@ -88,7 +71,7 @@ function BLogInfo() {
               marginBottom: "2rem",
             }}
           >
-            ← Go back to my blogs
+            ← Go back 
           </a>
         </h4>
       </div>

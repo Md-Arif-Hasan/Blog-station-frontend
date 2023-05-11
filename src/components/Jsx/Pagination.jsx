@@ -30,16 +30,18 @@ export default function BasicPagination({
     changePage(value);
   };
 
-  return (
-    <Stack spacing={2} style={{ display: "flex" }}>
-      <Pagination
-        color="primary"
-        count={totalPages}
-        page={parseInt(pageNumber) || 1}
-        shape="rounded"
-        onChange={onChangePage}
-        style={{ justifyContent: "center" }}
-      />
-    </Stack>
-  );
+  if(blogCount){
+    return (
+      <Stack spacing={2} style={{ display: "flex" }}>
+        <Pagination
+          color="primary"
+          count={totalPages}
+          page={parseInt(pageNumber) || 1}
+          shape="rounded"
+          onChange={onChangePage}
+          style={{ justifyContent: "center" }}
+        />
+      </Stack>
+    );
+  }
 }
