@@ -11,10 +11,7 @@ export default function Form() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const { checkLoggedIn } = useContext(AuthContext);
-
-  
   const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
   const [errorUsername, setErrorUsername] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
@@ -22,18 +19,13 @@ export default function Form() {
   const [errorLineUsername, setErrorLineUsername] = useState("");
   const [errorLineEmail, setErrorLineEmail] = useState("");
   const [errorLinePassword, setErrorLinePassword] = useState("");
-
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
-    if(checkLoggedIn()){
-        navigate("/dashboard");
+    if (checkLoggedIn()) {
+      navigate("/dashboard");
     }
-}, []);
-
-
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -47,13 +39,9 @@ export default function Form() {
         password: password,
         email: email,
       };
-
       try {
         const response = await register(newUser);
         console.log(response.data);
-
-        console.log("regggggggg")
-
         if (response.data.status === 201) {
           setErrorOrSuccessLine(
             "User successfully registered! Please go to the login section"
@@ -138,7 +126,6 @@ export default function Form() {
             src="src\assets\registered.png"
           />
         </div>
-
         <div className="form">
           <form>
             <TextField
@@ -151,7 +138,6 @@ export default function Form() {
               error={errorUsername}
               helperText={errorLineUsername}
             />
-
             <TextField
               id="email"
               className="input"
@@ -162,7 +148,6 @@ export default function Form() {
               error={errorEmail}
               helperText={errorLineEmail}
             />
-
             <TextField
               id="password"
               type="password"

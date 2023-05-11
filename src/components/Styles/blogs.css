@@ -13,14 +13,10 @@
 
 .description {
     text-align: justify;
-    /* overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 90%; */
     overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 

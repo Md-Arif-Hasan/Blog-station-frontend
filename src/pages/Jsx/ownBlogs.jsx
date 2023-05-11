@@ -6,28 +6,21 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Blogs from "./singleAuthorBlogs";
 
-
 export default function Dashboard() {
   const [blogCount, setBlogCount] = useState(0);
-
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
 
-
   const changePage = (page) => {
     setPageNumber(page);
   };
-
   const navigate = useNavigate();
-
-
   useEffect(() => {
     if (!checkLoggedIn()) {
       navigate("/dashboard");
     }
   }, []);
-
 
   return (
     <>
@@ -38,7 +31,6 @@ export default function Dashboard() {
           setPageSize={setPageSize}
           setBlogCount={setBlogCount}
         />
-
         <div
           style={{
             display: "flex",

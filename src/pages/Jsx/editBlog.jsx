@@ -6,10 +6,8 @@ import "../Styles/profile.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/contexts";
-
 import { editBlog } from "../../services/blogList";
 import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
 
@@ -18,30 +16,22 @@ function BLogInfo() {
   const [blogId, setBlogid] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
   const { loggedInUsername } = useContext(AuthContext);
   const [username, setUsername] = useState(loggedInUsername);
- 
-
   const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
-
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDescription, setErrorDescription] = useState(false);
-
   const [errorLineTitle, setErrorLineTitle] = useState("");
   const [errorLineDescription, setErrorLineDescription] = useState("");
 
   useEffect(() => {
     const data = location.state;
-
     setTitle(data.title);
     setDescription(data.description);
     setBlogid(data.id);
   }, []);
-
 
   async function getBlogDetails() {
     const newBlog = {
@@ -52,9 +42,7 @@ function BLogInfo() {
     if (validateTitle(title) && validateDescription(description)) {
       try {
         let details = await editBlog(blogId, newBlog);
-
         console.log(details.status);
-
         if (details.status === 200) {
           setBlogDetails(details.data);
           navigate(`/blogs/users/${username}`);
@@ -131,8 +119,7 @@ function BLogInfo() {
         </div>
         <hr style={{ border: "1px solid #e0d8c3" }} />
 
-      <Button
-        
+        <Button
           variant="contained"
           className="save"
           onClick={(e) => getBlogDetails()}
@@ -149,7 +136,6 @@ export default function EditBlog() {
   const handleOptionClick = (option) => {
     setSelectedOption(option);
   };
-
   return (
     <>
       <NavbarDashboard />

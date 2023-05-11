@@ -14,22 +14,22 @@ export const AuthProvider = (props) => {
   }, []);
 
   const checkLoggedIn = () => {
-    if(!tokenExpired()){
-    const tokenUsername = parseCookie();
-    if(tokenUsername){
+    if (!tokenExpired()) {
+      const tokenUsername = parseCookie();
+      if (tokenUsername) {
+        setExpired(false);
+        setLoggedInUsername(tokenUsername);
+        return true;
+      }
       setExpired(false);
-      setLoggedInUsername(tokenUsername);
-      return true;
-    }
-    setExpired(false);
-    setLoggedInUsername(null);
-    return false;
-   } else {
+      setLoggedInUsername(null);
+      return false;
+    } else {
       setExpired(true);
       setLoggedInUsername(null);
       return false;
-   }
-  }
+    }
+  };
 
   const setStatusSignedIn = () => {
     try {

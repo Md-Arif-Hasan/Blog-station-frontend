@@ -21,8 +21,6 @@ function UserInfo() {
   const [errorOldPassword, setErrorOldPassword] = useState(false);
   const [errorLineOldPassword, setErrorLineOldPassword] = useState("");
   const { checkLoggedIn, loggedInUsername } = useContext(AuthContext);
-
-
   const [disableSave, setDisableSave] = useState(true);
   const navigate = useNavigate();
 
@@ -59,7 +57,6 @@ function UserInfo() {
   }, []);
 
   useEffect(() => {
-
     async function getUserDetails() {
       let details = await getUserByUsername(loggedInUsername);
       setUserDetails(details.data);
@@ -170,11 +167,9 @@ function UserInfo() {
 
 export default function Profile() {
   const [selectedOption, setSelectedOption] = useState("userInfo");
-
   const handleOptionClick = (option) => {
     setSelectedOption(option);
   };
-
   return (
     <>
       <NavbarDashboard />

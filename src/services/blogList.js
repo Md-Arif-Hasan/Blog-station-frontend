@@ -11,17 +11,16 @@ const getAllBlogs = async (pageNumber) => {
   }
 };
 
-
 const getAllBlogsByAuthorId = async (authorId, pageNumber) => {
-    try {
-      const response = await api.get(
-        "/blog/author/" +authorId+ "?pageNo=" + pageNumber + "&pageSize=5"
-      );
-      return response;
-    } catch (err) {
-      return err.response;
-    }
-  };
+  try {
+    const response = await api.get(
+      "/blog/author/" + authorId + "?pageNo=" + pageNumber + "&pageSize=5"
+    );
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
 
 const createBlog = async (newBlog) => {
   try {

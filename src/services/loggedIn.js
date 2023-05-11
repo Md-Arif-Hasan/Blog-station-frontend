@@ -1,4 +1,3 @@
-
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 
@@ -16,12 +15,12 @@ function parseCookie() {
 function tokenExpired() {
   let jwtcookie = Cookies.get("jwt");
   try {
-      let token = jwt_decode(jwtcookie);
-      let expirationTime = token.exp;
-      let current_time = Date.now() / 1000;
-      if (expirationTime < current_time) {
-        return true;
-      }
+    let token = jwt_decode(jwtcookie);
+    let expirationTime = token.exp;
+    let current_time = Date.now() / 1000;
+    if (expirationTime < current_time) {
+      return true;
+    }
     return false;
   } catch {
     return false;

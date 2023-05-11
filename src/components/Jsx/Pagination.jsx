@@ -10,11 +10,8 @@ export default function BasicPagination({
   blogCount,
 }) {
   const navigate = useNavigate();
-
   let totalPages = 5;
-
   if (blogCount) {
-
     totalPages = Math.ceil(blogCount / pageSize);
     console.log(
       "Total pages: " +
@@ -33,7 +30,6 @@ export default function BasicPagination({
     changePage(value);
   };
 
-  if( blogCount ){
   return (
     <Stack spacing={2} style={{ display: "flex" }}>
       <Pagination
@@ -46,6 +42,4 @@ export default function BasicPagination({
       />
     </Stack>
   );
-  }
-  return ( <></> )
 }

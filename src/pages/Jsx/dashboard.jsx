@@ -4,20 +4,15 @@ import Navbar from "../../components/Jsx/Navbar";
 import Pagination from "../../components/Jsx/Pagination";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/contexts";
-
 import Blogs from "../../components/Jsx/blogs";
 import "../Styles/dashboard.css";
 
 export default function Dashboard() {
   const [signedIn, setSignedIn] = useState(false);
-
   const [blogCount, setBlogCount] = useState(0);
-
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const { checkLoggedIn } = useContext(AuthContext);
-
-
 
   useEffect(() => {
     if (checkLoggedIn()) {

@@ -1,44 +1,29 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 
-export default function AlertDialog({submit}) {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleCloseCancel = () => {
-    setOpen(false);
-  };
-
-  const handleCloseFunction = () => {
+export default function AlertDialog({ submit, close }) {
+  const handleSubmit = () => {
     submit();
-    setOpen(false);
+    close();
   };
-
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Delete
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleCloseCancel}
-      >
+      <Dialog open={true}>
         <DialogTitle id="alert-dialog-title">
-          {" Are you sure to perform this action?"}
+          <b> {" Are you sure to perform this action?"} </b>
         </DialogTitle>
-        <DialogContent>
-        </DialogContent>
+        <DialogContent></DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseCancel}>Cancel</Button>
-          <Button onClick={handleCloseFunction} autoFocus>
-            Yes, Sure
+          <Button onClick={close}>
+            {" "}
+            <b> Cancel </b>
+          </Button>
+          <Button onClick={handleSubmit} autoFocus>
+            <b> Yes,Sure </b>
           </Button>
         </DialogActions>
       </Dialog>

@@ -13,8 +13,6 @@ export default function Login() {
   const [error, setError] = useState(false);
   const [status, setStatus] = useState("");
   const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
-
-
   const navigate = useNavigate();
 
   const submit = async (e) => {
@@ -24,12 +22,9 @@ export default function Login() {
         username: username,
         password: password,
       };
-
       try {
         const response = await login(loginUser);
-
         console.log(response);
-
         if (response.status === 200) {
           navigate("/dashboard");
           console.log(response.data.message);
@@ -45,15 +40,12 @@ export default function Login() {
       setStatus("Please enter your username and password");
     }
   };
-
   useEffect(() => {
-    if(checkLoggedIn()){
-        navigate("/dashboard");
+    if (checkLoggedIn()) {
+      navigate("/dashboard");
     }
-}, []);
+  }, []);
 
-
-  
   const loginStatus = () => {
     return (
       <div
@@ -76,9 +68,7 @@ export default function Login() {
             src="src\assets\account.png"
           />
         </div>
-
         <div className="messages">{loginStatus()}</div>
-
         <div className="loginForm">
           <form>
             <TextField
@@ -89,7 +79,6 @@ export default function Login() {
               label="Username"
               variant="outlined"
             />
-
             <TextField
               id="password"
               type="password"
@@ -99,11 +88,9 @@ export default function Login() {
               label="Password"
               variant="outlined"
             />
-
             <Button className="button" onClick={submit} variant="contained">
               Login
             </Button>
-
             <h4 className="loginLine">
               {" "}
               Don't have an account?

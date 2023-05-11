@@ -13,29 +13,20 @@ export default function Form() {
   const [errorOrSuccessLine, setErrorOrSuccessLine] = useState("");
   const [errorTitle, setErrorTitle] = useState(false);
   const [errorDescription, setErrorDescription] = useState(false);
-
   const [errorLineTitle, setErrorLineTitle] = useState("");
   const [errorLineDescription, setErrorLineDescription] = useState("");
   const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
 
-
   const navigate = useNavigate();
-
-  
   useEffect(() => {
     if (!checkLoggedIn()) {
       navigate("/dashboard");
     }
   }, []);
-
-
   const submit = async (e) => {
-
     if (!checkLoggedIn()) {
       navigate("/dashboard");
     }
-
-    
     e.preventDefault();
     if (validateTitle(title) && validateDescription(description)) {
       const newBlog = {
@@ -46,7 +37,6 @@ export default function Form() {
       try {
         const response = await createBlog(newBlog);
         console.log(response.data);
-
         if (response.status === 201) {
           setErrorOrSuccessLine("Blog successfully creted! ");
           console.log(response.data);
@@ -70,7 +60,6 @@ export default function Form() {
       setErrorLineTitle("\u{26A0} TItle is required");
       return false;
     }
-
     setErrorTitle(false);
     setErrorLineTitle("");
     return true;
@@ -82,7 +71,6 @@ export default function Form() {
       setErrorLineDescription("\u{26A0} Description is required");
       return false;
     }
-
     setErrorDescription(false);
     setErrorLineDescription("");
     return true;
@@ -92,12 +80,11 @@ export default function Form() {
     <>
       <NavbarDashboard />
       <div className="page">
-
         <div className="image">
           <img
             className="logo"
             style={{ width: "120px", height: "auto" }}
-            src="/src/assets/blogging.png" 
+            src="/src/assets/blogging.png"
           />
         </div>
 

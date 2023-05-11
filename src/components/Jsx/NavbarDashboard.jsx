@@ -1,6 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import { useState, useEffect } from "react"
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -15,22 +15,16 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
-
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/contexts";
-
- import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
-
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
   const { loggedInUsername } = useContext(AuthContext);
   const [username, setUsername] = useState(loggedInUsername);
- 
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -45,7 +39,6 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
 
   const logoutUser = async () => {
     try {
@@ -165,21 +158,21 @@ function ResponsiveAppBar() {
               onClick={(e) => navigate("/registeredusers")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Authors
+              <b> Authors </b>
             </Button>
 
             <Button
               onClick={(e) => navigate("/dashboard")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Blogs
+              <b> Blogs </b>
             </Button>
 
             <Button
               onClick={(e) => navigate("/blogs/create")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Create Blog
+              <b> Create Blog </b>
             </Button>
           </Box>
 

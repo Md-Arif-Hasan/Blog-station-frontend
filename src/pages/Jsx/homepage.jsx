@@ -1,13 +1,11 @@
 import "../Styles/homepage.css";
 import Navbar from "../../components/Jsx/Navbar";
-
 import * as React from "react";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-
       <div className="container"  style={{ padding: "1rem 4rem 1.5rem" }}></div>
         <div className="right">
           <h1 className="title">Blog Station</h1>
@@ -16,8 +14,6 @@ export default function Home() {
           </h2>
           <a href="./login" className="goToLogin">Login & Start your journey with us!</a>
         </div>
-        
-      {/* </div> */}
     </>
   );
 }
