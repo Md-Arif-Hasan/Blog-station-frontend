@@ -1,7 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import Button from "@mui/material/Button";
 import Alert from "../../components/Jsx/dialog";
 
