@@ -20,7 +20,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     const pgSize = searchParams.get("pageSize");
      if(pgNo === null)  setPageNumber(1);
     if (pgSize && pgSize !== "null") setPageSize(pgSize);
-    fetchAllBlogs(pgNo, pgSize);
+    fetchAllBlogs(1, pgSize);
   }, [blogAdded, searchParams]);
 
   const fetchAllBlogs = async (pageNumber, pageSize) => {
