@@ -19,7 +19,6 @@ function BLogInfo() {
   useEffect(() => {
     const data = location.state;
     if (data) {
-      console.log(data);
       setTitle(data.title);
       setDescription(data.description);
       setBlogid(data.id);

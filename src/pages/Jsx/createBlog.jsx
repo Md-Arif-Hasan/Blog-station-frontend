@@ -15,7 +15,7 @@ export default function Form() {
   const [errorDescription, setErrorDescription] = useState(false);
   const [errorLineTitle, setErrorLineTitle] = useState("");
   const [errorLineDescription, setErrorLineDescription] = useState("");
-  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
+  const { checkLoggedIn, loggedInUsername } = useContext(AuthContext);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -23,6 +23,7 @@ export default function Form() {
       navigate("/dashboard");
     }
   }, []);
+
   const submit = async (e) => {
     if (!checkLoggedIn()) {
       navigate("/dashboard");

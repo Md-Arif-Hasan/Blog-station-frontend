@@ -1,33 +1,13 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Alert from "../../components/Jsx/dialog";
+import SingleBlog from "../../components/Jsx/singleAuthorBlog";
+import CircularProgress from "@mui/material/CircularProgress";
 import { AuthContext } from "../../contexts/contexts";
 import { useContext } from "react";
 import { getUserByUsername } from "../../services/user";
 import { getAllBlogsByAuthorId, deleteBlog } from "../../services/blogList";
-
-function formatTimestamp(timestamp) {
-  const options = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
-    timeZone: "UTC",
-  };
-  const formatted = new Date(timestamp).toLocaleString("en-US", options);
-  return (
-    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-      {formatted}
-    </Typography>
-  );
-}
 
 function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   const [blogs, setBlogs] = useState(null);
@@ -35,8 +15,9 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   const navigate = useNavigate();
   const [authorId, setAuthorId] = useState("");
   const [username, setUsername] = useState("");
-  const [alertOpen, setAlertOpen] = useState(false);
   const { checkLoggedIn, loggedInUsername } = useContext(AuthContext);
+  const [isLoading, setisLoading] = useState(true);
+
   useEffect(() => {
     if (!checkLoggedIn()) {
       navigate("/dashboard");
@@ -57,6 +38,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   const BlogsByAuthorId = async (authorId, pageNumber, pageSize) => {
     let allBlogs = null;
     allBlogs = await getAllBlogsByAuthorId(authorId, pageNumber, pageSize);
+    setisLoading(false);
 
     if (typeof allBlogs === "object") {
       setBlogs(allBlogs.data.rows);
@@ -67,7 +49,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     }
   };
 
-  const deleteBlogs = async (blogId) => {
+  const deleteOneBlog = async (blogId) => {
     const response = await deleteBlog(blogId);
     console.log(response.data);
     if (response.status === 200) {
@@ -76,82 +58,31 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     await BlogsByAuthorId(authorId, 1, 5);
   };
 
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress color="inherit" />
+      </Box>
+    );
+  }
+
   if (!blogs)
     return (
       <>
         <h1 className="notFound">No blog found</h1>
       </>
     );
+
   return (
     <>
       {blogs.map((item) => (
-        <Card className="blogCards" key={item.id}>
-          <CardContent style={{ overflowWrap: "break-word" }}>
-            <Typography
-              variant="h5"
-              component="div"
-              style={{
-                fontFamily: "Poppins",
-                fontWeight: "bold",
-                color: "#863812",
-              }}
-            >
-              <a
-                onClick={(e) => navigate(`/blogs/${item.id}`, { state: item })}
-              >
-                {" "}
-                {item.title}{" "}
-              </a>
-            </Typography>
-
-            <Typography
-              variant="h5"
-              component="div"
-              style={{
-                fontFamily: "Poppins",
-                fontWeight: "italic",
-                color: "#25383C",
-              }}
-            >
-              Author: {item.author.username}
-            </Typography>
-
-            {formatTimestamp(item.updatedAt)}
-            <div className="description">{item.description}</div>
-          </CardContent>
-          <Button
-            size="small"
-            disableElevation
-            variant="contained"
-            style={{
-              backgroundColor: "#863812",
-              marginRight: "0.5rem",
-              marginBottom: "0.5rem",
-            }}
-            onClick={(e) => navigate(`/blogs/${item.id}/edit`, { state: item })}
-          >
-            Edit
-          </Button>
-
-          <Button
-            variant="outlined"
-            size="small"
-            disableElevation
-            style={{
-              marginRight: "0.5rem",
-              marginBottom: "0.5rem",
-            }}
-            onClick={() => setAlertOpen(true)}
-          >
-            Delete
-          </Button>
-          {alertOpen && (
-            <Alert
-              submit={() => deleteBlogs(item.id)}
-              close={() => setAlertOpen(false)}
-            />
-          )}
-        </Card>
+        <SingleBlog key={item.id} item={item} deleteOneBlog={deleteOneBlog} />
       ))}
     </>
   );

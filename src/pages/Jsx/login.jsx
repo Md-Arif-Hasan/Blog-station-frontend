@@ -12,7 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [status, setStatus] = useState("");
-  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
+  const { checkLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const submit = async (e) => {

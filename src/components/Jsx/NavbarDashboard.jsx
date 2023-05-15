@@ -24,7 +24,7 @@ function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { loggedInUsername } = useContext(AuthContext);
-  const [username, setUsername] = useState(loggedInUsername);
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -189,7 +189,7 @@ function ResponsiveAppBar() {
               sx={{ padding: 0, fontSize: "14px" }}
               onClick={(e) => navigate("/profile")}
             >
-              <b> {username}</b>
+              <b>{loggedInUsername}</b>
             </Typography>
 
             <Menu
@@ -233,7 +233,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate(`/blogs/users/${username}`)}
+                  onClick={(e) => navigate(`/blogs/users/${loggedInUsername}`)}
                 >
                   My Blogs
                 </Typography>

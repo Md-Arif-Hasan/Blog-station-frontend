@@ -10,7 +10,7 @@ export default function Dashboard() {
   const [blogCount, setBlogCount] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-  const { checkLoggedIn, setStatusSignedIn } = useContext(AuthContext);
+  const { checkLoggedIn } = useContext(AuthContext);
 
   const changePage = (page) => {
     setPageNumber(page);

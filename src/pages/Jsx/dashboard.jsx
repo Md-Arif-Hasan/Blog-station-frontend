@@ -4,7 +4,7 @@ import Navbar from "../../components/Jsx/Navbar";
 import Pagination from "../../components/Jsx/Pagination";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/contexts";
-import Blogs from "../../components/Jsx/blogs";
+import Blogs from "./blogs";
 import "../Styles/dashboard.css";
 
 export default function Dashboard() {

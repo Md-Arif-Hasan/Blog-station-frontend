@@ -2,8 +2,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import Alert from "./dialog";
+
 import { useNavigate } from "react-router-dom";
 
 function formatTimestamp(timestamp) {
@@ -24,8 +23,7 @@ function formatTimestamp(timestamp) {
   );
 }
 
-function SingleBlog({ item, deleteOneBlog }) {
-  const [alertOpen, setAlertOpen] = useState(false);
+function SingleBlog({ item }) {
   const navigate = useNavigate();
 
   return (
@@ -61,29 +59,6 @@ function SingleBlog({ item, deleteOneBlog }) {
           {formatTimestamp(item.updatedAt)}
           <div className="description">{item.description}</div>
         </CardContent>
-        <Button
-          size="small"
-          disableElevation
-          variant="contained"
-          style={{
-            backgroundColor: "#863812",
-            marginRight: "0.5rem",
-            marginBottom: "0.5rem",
-          }}
-          onClick={(e) => navigate(`/blogs/${item.id}/edit`, { state: item })}
-        >
-          Edit
-        </Button>
-
-        <Button variant="outlined" onClick={() => setAlertOpen(true)}>
-          Delete
-        </Button>
-        {alertOpen && (
-          <Alert
-            submit={() => deleteOneBlog(item.id)}
-            close={() => setAlertOpen(false)}
-          />
-        )}
       </Card>
     </>
   );

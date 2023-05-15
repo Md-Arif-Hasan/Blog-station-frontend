@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 
 const register = async (newUser) => {
   try {
-    const response = await api.post("/auth/register", newUser, {
+    const response = await api.post(`/auth/register`, newUser, {
       withCredentials: true,
     });
     return response;
@@ -15,7 +15,7 @@ const register = async (newUser) => {
 
 const login = async (loginUser) => {
   try {
-    const response = await api.post("/auth/login", loginUser, {
+    const response = await api.post(`/auth/login`, loginUser, {
       withCredentials: true,
     });
     let cookie = Cookies.get("jwt");
