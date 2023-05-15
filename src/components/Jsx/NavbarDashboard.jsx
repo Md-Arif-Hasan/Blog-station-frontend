@@ -127,7 +127,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/blogs/create")}
+                  onClick={(e) => navigate("/blog/create")}
                 >
                   Create Blog
                 </Typography>

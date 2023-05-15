@@ -45,7 +45,7 @@ function BLogInfo() {
         console.log(details.status);
         if (details.status === 200) {
           setBlogDetails(details.data);
-          navigate(`/blogs/users/${username}`);
+          navigate(`/blog/users/${username}`);
         } else {
           setErrorOrSuccessLine(response.data.message);
           console.log(response.data);
