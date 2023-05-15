@@ -41,7 +41,7 @@ function SingleBlog({ item, deleteOneBlog }) {
               color: "#863812",
             }}
           >
-            <a onClick={(e) => navigate(`/blogs/${item.id}`, { state: item })}>
+            <a onClick={(e) => navigate(`/blog/${item.id}`, { state: item })}>
               {item.title}
             </a>
           </Typography>
@@ -70,7 +70,7 @@ function SingleBlog({ item, deleteOneBlog }) {
             marginRight: "0.5rem",
             marginBottom: "0.5rem",
           }}
-          onClick={(e) => navigate(`/blogs/${item.id}/edit`, { state: item })}
+          onClick={(e) => navigate(`/blog/${item.id}/edit`, { state: item })}
         >
           Edit
         </Button>

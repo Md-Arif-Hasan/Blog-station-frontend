@@ -39,7 +39,7 @@ function SingleBlog({ item }) {
               color: "#863812",
             }}
           >
-            <a onClick={(e) => navigate(`/blogs/${item.id}`, { state: item })}>
+            <a onClick={(e) => navigate(`/blog/${item.id}`, { state: item })}>
               {item.title}
             </a>
           </Typography>

@@ -3,7 +3,7 @@ import api from "../api";
 const getAllBlogs = async (pageNumber) => {
   try {
     const response = await api.get(
-      `/blogs?pageNo=${pageNumber}&pageSize=5`
+      `/blog?pageNo=${pageNumber}&pageSize=5`
     );
     return response;
   } catch (err) {
@@ -13,7 +13,7 @@ const getAllBlogs = async (pageNumber) => {
 
 const getAllBlogsByAuthorId = async (authorId, pageNumber) => {
   try {
-    const response = await api.get(`/blogs/author/${authorId}?pageNo=${pageNumber}&pageSize=5`);
+    const response = await api.get(`/blog/author/${authorId}?pageNo=${pageNumber}&pageSize=5`);
     return response;
   } catch (err) {
     return err.response;
@@ -22,7 +22,7 @@ const getAllBlogsByAuthorId = async (authorId, pageNumber) => {
 
 const createBlog = async (newBlog) => {
   try {
-    const response = await api.post("/blogs", newBlog, {
+    const response = await api.post("/blog", newBlog, {
       withCredentials: true,
     });
     return response;
@@ -33,7 +33,7 @@ const createBlog = async (newBlog) => {
 
 const editBlog = async (blogId, editedBlog) => {
   try {
-    const response = await api.put("/blogs/" + blogId, editedBlog, {
+    const response = await api.put("/blog/" + blogId, editedBlog, {
       withCredentials: true,
     });
     return response;
@@ -44,7 +44,7 @@ const editBlog = async (blogId, editedBlog) => {
 
 const deleteBlog = async (blogId) => {
   try {
-    const response = await api.delete("/blogs/" + blogId, {
+    const response = await api.delete("/blog/" + blogId, {
       withCredentials: true,
     });
     return response;
