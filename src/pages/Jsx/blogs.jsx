@@ -20,11 +20,11 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     const pgSize = searchParams.get("pageSize");
 
     console.log("pageno"+pgNo);
-    
+    if(pgNo == "null")  setPageNumber(1);
+
     if (pgNo && pgNo !== "null"){
       setPageNumber(pgNo);
-    } else  setPageNumber(1);
-
+    } 
     if (pgSize && pgSize !== "null") setPageSize(pgSize);
     fetchAllBlogs(pgNo, pgSize);
   }, [blogAdded, searchParams]);
