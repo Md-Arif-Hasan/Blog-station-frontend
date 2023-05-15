@@ -20,7 +20,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     const pgSize = searchParams.get("pageSize");
 
     console.log("pageno"+pgNo);
-    if(pgNo == "null")  setPageNumber(1);
+    if(pgNo == null)  setPageNumber(1);
 
     if (pgNo && pgNo !== "null"){
       setPageNumber(pgNo);

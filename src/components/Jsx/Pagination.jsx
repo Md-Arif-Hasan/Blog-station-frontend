@@ -36,7 +36,7 @@ export default function BasicPagination({
         <Pagination
           color="primary"
           count={totalPages}
-          page={parseInt(pageNumber) || 1}
+          page={parseInt(pageNumber) || 1 }
           shape="rounded"
           onChange={onChangePage}
           style={{ justifyContent: "center" }}
