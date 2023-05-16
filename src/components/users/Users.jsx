@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/userList";
 import { Grid, ListItem } from "@mui/material";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
-import "./Users.css";
+import "./users.css";
 
 function formatTimestamp(timestamp, createOrUpdate) {
   const options = {
