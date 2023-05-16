@@ -26,6 +26,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     const pgSize = searchParams.get("pageSize");
     if (pgNo && pgNo !== "null") setPageNumber(pgNo);
     if (pgSize && pgSize !== "null") setPageSize(pgSize);
+    
     async function getUser() {
       const user = await getUserByUsername(loggedInUsername);
       setAuthorId(user.data.id);

@@ -127,7 +127,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/blog/create")}
+                  onClick={(e) => navigate("/blogs/create")}
                 >
                   Create Blog
                 </Typography>
@@ -169,7 +169,7 @@ function ResponsiveAppBar() {
             </Button>
 
             <Button
-              onClick={(e) => navigate("/blog/create")}
+              onClick={(e) => navigate("/blogs/create")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               <b> Create Blog </b>
@@ -233,7 +233,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate(`/blog/users/${loggedInUsername}`)}
+                  onClick={(e) => navigate(`/blogs/users/${loggedInUsername}`)}
                 >
                   My Blogs
                 </Typography>
