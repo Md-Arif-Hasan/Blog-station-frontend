@@ -4,20 +4,7 @@ import App from './App'
 import { StyledEngineProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css'
-import { AuthProvider } from './contexts/Contexts';
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <BrowserRouter>
-//       <StyledEngineProvider injectFirst>
-//       <AuthProvider>
-//           <App />
-//         </AuthProvider>
-//       </StyledEngineProvider>
-//     </BrowserRouter>
-//   </React.StrictMode>
-// )
-
+import { AuthProvider } from './contexts/Contexts.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
