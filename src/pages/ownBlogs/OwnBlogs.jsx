@@ -4,7 +4,7 @@ import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import OwnBlogs from "./singleAuthorBlogs";
+import OwnBlogs from "./SingleAuthorBlogs";
 
 export default function Dashboard() {
   const [blogCount, setBlogCount] = useState(0);
