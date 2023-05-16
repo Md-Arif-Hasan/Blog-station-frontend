@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
-import Navbar from "../../components/Navbar/Navbar";
-import Pagination from "../../components/Pagination/Pagination";
+import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
+import Navbar from "../../components/navbar/Navbar";
+import Pagination from "../../components/pagination/Pagination";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Contexts";
-import Blogs from "../AllBlogsPage/blogs";
+import Blogs from "../allBlogsPage/Blogs";
 import "./dashboard.css";
 
 export default function Dashboard() {

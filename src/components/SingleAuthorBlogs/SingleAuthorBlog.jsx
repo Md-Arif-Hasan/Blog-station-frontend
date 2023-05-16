@@ -3,7 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import Alert from "../Dialog/Dialog";
+import Alert from "../dialog/Dialog";
 import { useNavigate } from "react-router-dom";
 
 function formatTimestamp(timestamp) {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Pagination from "../../components/Pagination/Pagination";
-import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import Pagination from "../../components/pagination/Pagination";
+import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";

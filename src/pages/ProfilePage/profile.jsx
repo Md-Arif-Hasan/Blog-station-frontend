@@ -6,7 +6,7 @@ import "./profile.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserByUsername, updateUserByUsername } from "../../services/user";
-import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 

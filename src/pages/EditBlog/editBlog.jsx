@@ -2,14 +2,14 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { TextField, Button } from "@mui/material";
-import "../ProfilePage/profile.css";
+import "../profilePage/profile.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Contexts";
 import { editBlog } from "../../services/blogList";
-import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 
 function BLogInfo() {
   const [details, setBlogDetails] = useState("");

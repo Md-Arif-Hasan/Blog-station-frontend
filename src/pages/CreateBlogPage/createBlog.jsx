@@ -3,7 +3,7 @@ import { TextField, Button } from "@mui/material";
 import { createBlog } from "../../services/blogList";
 import "./createBlog.css";
 import { useNavigate } from "react-router-dom";
-import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 

@@ -1,5 +1,5 @@
 import "./homepage.css";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import * as React from "react";
 
 export default function Home() {

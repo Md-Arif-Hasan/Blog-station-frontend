@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 

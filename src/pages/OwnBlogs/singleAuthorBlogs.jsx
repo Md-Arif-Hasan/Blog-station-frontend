@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import SingleBlog from "../../components/SingleAuthorBlogs/SingleAuthorBlog";
+import SingleBlog from "../../components/singleAuthorBlogs/SingleAuthorBlog";
 import CircularProgress from "@mui/material/CircularProgress";
 import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";

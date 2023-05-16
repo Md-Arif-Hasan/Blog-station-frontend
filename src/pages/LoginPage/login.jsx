@@ -3,7 +3,7 @@ import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
 import "./login.css";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 

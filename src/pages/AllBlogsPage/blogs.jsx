@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getAllBlogs } from "../../services/blogList";
 import CircularProgress from "@mui/material/CircularProgress";
-import BlogCard from "../../components/SingleBlog/SingleBlog.jsx";
+import BlogCard from "../../components/singleBlog/SingleBlog";
 
 
 import "./blogs.css";

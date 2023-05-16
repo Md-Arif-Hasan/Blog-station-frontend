@@ -1,15 +1,15 @@
-import Register from "./pages/RegisterPage/register";
-import Login from "./pages/LoginPage/login";
+import Register from "./pages/registerPage/Register";
+import Login from "./pages/loginPage/Login";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Dashboard from "./pages/Dashboard/dashboard";
-import Homepage from "./pages/HomePage/homepage";
-import Profile from "./pages/ProfilePage/profile";
-import CreateBlog from "./pages/CreateBlogPage/createBlog";
-import Users from "./pages/AuthorsPage/registeredusers";
-import MyBlogs from "./pages/OwnBlogs/ownBlogs";
-import EditBlog from "./pages/EditBlog/editBlog";
-import FullBlog from "./pages/ViewFullBlog/fullBlog";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Homepage from "./pages/homePage/Homepage";
+import Profile from "./pages/profilePage/Profile";
+import CreateBlog from "./pages/createBlogPage/CreateBlog";
+import Users from "./pages/authorsPage/Registeredusers";
+import MyBlogs from "./pages/ownBlogs/OwnBlogs";
+import EditBlog from "./pages/editBlog/EditBlog";
+import FullBlog from "./pages/viewFullBlog/FullBlog";
 
 function App() {
   return (

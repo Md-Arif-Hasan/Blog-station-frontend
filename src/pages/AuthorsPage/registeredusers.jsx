@@ -1,5 +1,5 @@
-import UsersList from "../../components/Users/Users";
-import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import UsersList from "../../components/users/Users.jsx";
+import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 
 export default function Users() {
   return (
