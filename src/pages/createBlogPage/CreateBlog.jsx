@@ -37,17 +37,13 @@ export default function Form() {
 
       try {
         const response = await createBlog(newBlog);
-        console.log(response.data);
         if (response.status === 201) {
           setErrorOrSuccessLine("Blog successfully creted! ");
-          console.log(response.data);
           navigate("/dashboard");
         } else {
           setErrorOrSuccessLine(response.data.message);
-          console.log(response.data);
         }
       } catch (err) {
-        console.log("An error occured!");
         setErrorOrSuccessLine("An error occured");
       }
     } else {

@@ -1,8 +1,21 @@
 import "./homepage.css";
 import Navbar from "../../components/navbar/Navbar";
 import * as React from "react";
+import { AuthContext } from "../../contexts/Contexts";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const { checkLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (checkLoggedIn()) {
+      navigate("/dashboard");
+    }
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -12,7 +25,7 @@ export default function Home() {
           <h2 className="quote">
           “Blogging is a simple way through<br /> which you can share extraordinary ideas.”
           </h2>
-          <a href="./login" className="goToLogin">Login & Start your journey with us!</a>
+          <a onClick={() => navigate(`/login`)}   className="goToLogin">Login & Start your journey with us</a>
         </div>
     </>
   );

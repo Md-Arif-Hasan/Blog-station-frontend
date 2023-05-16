@@ -24,10 +24,8 @@ export default function Login() {
       };
       try {
         const response = await login(loginUser);
-        console.log(response);
         if (response.status === 200) {
           navigate("/dashboard");
-          console.log(response.data.message);
         } else {
           setError(true);
           setStatus(response.data.message);

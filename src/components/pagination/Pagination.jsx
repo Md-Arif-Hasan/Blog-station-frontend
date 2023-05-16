@@ -13,16 +13,6 @@ export default function BasicPagination({
   let totalPages = 5;
   if (blogCount) {
     totalPages = Math.ceil(blogCount / pageSize);
-    console.log(
-      "Total pages: " +
-        totalPages +
-        " " +
-        blogCount +
-        " " +
-        pageSize +
-        " " +
-        pageNumber
-    );
   }
 
   const onChangePage = (event, value) => {

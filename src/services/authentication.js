@@ -19,7 +19,6 @@ const login = async (loginUser) => {
       withCredentials: true,
     });
     let cookie = Cookies.get("jwt");
-    console.log(jwt_decode(cookie));
     return response;
   } catch (err) {
     return err.response;

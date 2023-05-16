@@ -42,16 +42,13 @@ function BLogInfo() {
     if (validateTitle(title) && validateDescription(description)) {
       try {
         let details = await editBlog(blogId, newBlog);
-        console.log(details.status);
         if (details.status === 200) {
           setBlogDetails(details.data);
           navigate(`/blogs/users/${username}`);
         } else {
           setErrorOrSuccessLine(response.data.message);
-          console.log(response.data);
         }
       } catch (err) {
-        console.log("An error occured!");
         setErrorOrSuccessLine("An error occured");
       }
     }

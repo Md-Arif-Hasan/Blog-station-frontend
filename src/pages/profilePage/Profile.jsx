@@ -32,7 +32,6 @@ function UserInfo() {
     if (password.length >= 6) {
       let response = await updateUserByUsername(username, updatedUser);
       if (response.status === 200) {
-        console.log("successful");
         setPassword("");
         setOldPassword("");
         setErrorPassword(false);
@@ -41,7 +40,6 @@ function UserInfo() {
         setErrorLineOldPassword("");
       } else {
         setErrorOldPassword(true);
-        console.log(response.data.message);
         setErrorLineOldPassword(response.data.message);
       }
     } else {

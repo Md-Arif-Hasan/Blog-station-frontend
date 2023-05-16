@@ -38,7 +38,6 @@ function AllUsers() {
   useEffect(() => {
     async function fetchUsers() {
       const allUsers = await getAllUsers();
-      console.log(allUsers.data);
       setUsers(allUsers.data);
     }
     fetchUsers();

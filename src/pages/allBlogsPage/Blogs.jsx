@@ -16,8 +16,6 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   useEffect(() => {
     const pgNo = searchParams.get("pageNo");
     const pgSize = searchParams.get("pageSize");
-
-    // console.log("pageno"+pgNo);
      if(pgNo === null)  setPageNumber(1);
     if (pgSize && pgSize !== "null") setPageSize(pgSize);
     fetchAllBlogs(pgNo, pgSize);
@@ -26,7 +24,6 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   const fetchAllBlogs = async (pageNumber, pageSize) => {
     let allBlogs = null;
     allBlogs = await getAllBlogs(pageNumber, pageSize);
-    console.log(allBlogs);
     setisLoading(false);
 
     if (typeof allBlogs === "object") {
@@ -43,13 +40,17 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     return(
        <Box
           sx={{
-            zIndex: 9999,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}
         >
-          <CircularProgress color="success" />
+          <CircularProgress color="inherit" />
         </Box>
   )}
 

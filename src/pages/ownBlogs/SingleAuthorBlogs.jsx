@@ -52,9 +52,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
 
   const deleteOneBlog = async (blogId) => {
     const response = await deleteBlog(blogId);
-    console.log(response.data);
     if (response.status === 200) {
-      console.log("Blog deleted!");
     }
     await BlogsByAuthorId(authorId, 1, 5);
   };
@@ -63,10 +61,14 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     return (
       <Box
         sx={{
-            zIndex: 9999,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
         <CircularProgress color="inherit" />

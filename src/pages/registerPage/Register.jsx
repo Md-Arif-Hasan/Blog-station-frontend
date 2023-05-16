@@ -41,20 +41,16 @@ export default function Form() {
       };
       try {
         const response = await register(newUser);
-        console.log(response.data);
         if (response.data.status === 201) {
           setErrorOrSuccessLine(
             "User successfully registered! Please go to the login section"
           );
-          console.log(response.data);
-          console.log("if");
+
           navigate("/dashboard");
         } else {
           setErrorOrSuccessLine(response.data.message);
-          console.log("ëlse");
         }
       } catch (err) {
-        console.log("An error occured!");
         setErrorOrSuccessLine("An error occured");
       }
     } else {
