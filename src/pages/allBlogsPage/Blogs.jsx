@@ -43,12 +43,10 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     return(
        <Box
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            display: "flex"
           }}
         >
-          <CircularProgress color="inherit" />
+          <CircularProgress color="success" />
         </Box>
   )}
 

@@ -22,7 +22,7 @@ const getAllBlogsByAuthorId = async (authorId, pageNumber) => {
 
 const createBlog = async (newBlog) => {
   try {
-    const response = await api.post("/blog", newBlog, {
+    const response = await api.post(`/blog`, newBlog, {
       withCredentials: true,
     });
     return response;
@@ -33,7 +33,7 @@ const createBlog = async (newBlog) => {
 
 const editBlog = async (blogId, editedBlog) => {
   try {
-    const response = await api.put("/blog/" + blogId, editedBlog, {
+    const response = await api.put(`/blog/` + blogId, editedBlog, {
       withCredentials: true,
     });
     return response;
@@ -44,7 +44,7 @@ const editBlog = async (blogId, editedBlog) => {
 
 const deleteBlog = async (blogId) => {
   try {
-    const response = await api.delete("/blog/" + blogId, {
+    const response = await api.delete(`/blog/` + blogId, {
       withCredentials: true,
     });
     return response;

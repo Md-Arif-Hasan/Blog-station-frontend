@@ -4,7 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 
@@ -28,7 +28,7 @@ export default function LeftSide() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -76,7 +76,7 @@ export default function LeftSide() {
                   textAlign="left"
                   variant="body1"
                   sx={{ padding: 0, fontSize: "14px" }}
-                  onClick={(e) => navigate("/dashboard")}
+                  onClick={() => navigate("/dashboard")}
                 >
                   {" "}
                   Blogs
@@ -87,7 +87,7 @@ export default function LeftSide() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/registeredusers")}
+                  onClick={() => navigate("/registeredusers")}
                 >
                   Authors
                 </Typography>
@@ -97,7 +97,7 @@ export default function LeftSide() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/blogs/create")}
+                  onClick={() => navigate("/blogs/create")}
                 >
                   Create Blog
                 </Typography>

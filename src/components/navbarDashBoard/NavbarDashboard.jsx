@@ -1,26 +1,13 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import Divider from "@mui/material/Divider";
-import LeftBar from "./NavbarlLeft";
+import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip , MenuItem, AdbIcon, Divider } from "@mui/material/AppBar";
 import { useNavigate } from "react-router-dom";
+import LeftBar from "./NavbarlLeft";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/Contexts";
 import Cookies from "js-cookie";
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { loggedInUsername } = useContext(AuthContext);
 
@@ -54,7 +41,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -70,21 +57,21 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
-              onClick={(e) => navigate("/registeredusers")}
+              onClick={() => navigate("/registeredusers")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               <b> Authors </b>
             </Button>
 
             <Button
-              onClick={(e) => navigate("/dashboard")}
+              onClick={() => navigate("/dashboard")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               <b> Blogs </b>
             </Button>
 
             <Button
-              onClick={(e) => navigate("/blogs/create")}
+              onClick={() => navigate("/blogs/create")}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               <b> Create Blog </b>
@@ -102,7 +89,7 @@ function ResponsiveAppBar() {
               textAlign="center"
               variant="body1"
               sx={{ padding: 0, fontSize: "14px" }}
-              onClick={(e) => navigate("/profile")}
+              onClick={() => navigate("/profile")}
             >
               <b>{loggedInUsername}</b>
             </Typography>
@@ -128,7 +115,7 @@ function ResponsiveAppBar() {
                   textAlign="left"
                   variant="body1"
                   sx={{ padding: 0, fontSize: "14px" }}
-                  onClick={(e) => navigate("/dashboard")}
+                  onClick={() => navigate("/dashboard")}
                 >
                   <b> Dashboard</b>
                 </Typography>
@@ -138,7 +125,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate("/profile")}
+                  onClick={() => navigate("/profile")}
                 >
                   Profile
                 </Typography>
@@ -148,7 +135,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => navigate(`/blogs/users/${loggedInUsername}`)}
+                  onClick={() => navigate(`/blogs/users/${loggedInUsername}`)}
                 >
                   My Blogs
                 </Typography>
@@ -158,7 +145,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   sx={{ padding: 0 }}
-                  onClick={(e) => logoutUser()}
+                  onClick={() => logoutUser()}
                 >
                   Logout
                 </Typography>

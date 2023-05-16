@@ -2,7 +2,7 @@ import api from "../api";
 
 const getUserByUsername = async (username) => {
   try {
-    const response = await api.get("/users/" + username);
+    const response = await api.get(`/users/` + username);
     return response;
   } catch (err) {
     return err.response;
