@@ -2,9 +2,9 @@ import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import SingleBlog from "../../components/Jsx/singleAuthorBlog";
+import SingleBlog from "../../components/SingleAuthorBlogs/SingleAuthorBlog";
 import CircularProgress from "@mui/material/CircularProgress";
-import { AuthContext } from "../../contexts/contexts";
+import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 import { getUserByUsername } from "../../services/user";
 import { getAllBlogsByAuthorId, deleteBlog } from "../../services/blogList";
@@ -26,7 +26,7 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
     const pgSize = searchParams.get("pageSize");
     if (pgNo && pgNo !== "null") setPageNumber(pgNo);
     if (pgSize && pgSize !== "null") setPageSize(pgSize);
-    
+
     async function getUser() {
       const user = await getUserByUsername(loggedInUsername);
       setAuthorId(user.data.id);

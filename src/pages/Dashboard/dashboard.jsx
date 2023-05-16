@@ -1,32 +1,36 @@
 import { useEffect, useState } from "react";
-import Pagination from "../../components/Jsx/Pagination";
-import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
-import { AuthContext } from "../../contexts/contexts";
+import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import Navbar from "../../components/Navbar/Navbar";
+import Pagination from "../../components/Pagination/Pagination";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import OwnBlogs from "./singleAuthorBlogs";
+import { AuthContext } from "../../contexts/Contexts";
+import Blogs from "../AllBlogsPage/blogs";
+import "./dashboard.css";
 
 export default function Dashboard() {
+  const [signedIn, setSignedIn] = useState(false);
   const [blogCount, setBlogCount] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const { checkLoggedIn } = useContext(AuthContext);
 
+  useEffect(() => {
+    if (checkLoggedIn()) {
+      setSignedIn(true);
+    } else {
+      setSignedIn(false);
+    }
+  },[]);
+
   const changePage = (page) => {
     setPageNumber(page);
   };
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!checkLoggedIn()) {
-      navigate("/dashboard");
-    }
-  }, []);
 
   return (
     <>
-      <NavbarDashboard />
+      {signedIn ? <NavbarDashboard /> : <Navbar />}
       <div className="dashboard">
-        <OwnBlogs
+        <Blogs
           setPageNumber={setPageNumber}
           setPageSize={setPageSize}
           setBlogCount={setBlogCount}

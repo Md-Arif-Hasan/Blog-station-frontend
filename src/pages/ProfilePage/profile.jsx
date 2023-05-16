@@ -2,12 +2,12 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { TextField, Button } from "@mui/material";
-import "../Styles/profile.css";
+import "./profile.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserByUsername, updateUserByUsername } from "../../services/user";
-import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
-import { AuthContext } from "../../contexts/contexts";
+import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
+import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 
 function UserInfo() {

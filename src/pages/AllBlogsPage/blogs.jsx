@@ -1,19 +1,17 @@
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { getAllBlogs } from "../../services/blogList";
 import CircularProgress from "@mui/material/CircularProgress";
-import BlogCard from "../../components/Jsx/singleBlog";
+import BlogCard from "../../components/SingleBlog/SingleBlog.jsx";
 
 
-import "../Styles/blogs.css";
+import "./blogs.css";
 
 function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   const [blogs, setBlogs] = useState(null);
   const [searchParams] = useSearchParams();
   const [isLoading, setisLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const pgNo = searchParams.get("pageNo");

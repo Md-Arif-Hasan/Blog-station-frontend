@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authentication";
-import "../Styles/login.css";
-import Navbar from "../../components/Jsx/Navbar";
-import { AuthContext } from "../../contexts/contexts";
+import "./login.css";
+import Navbar from "../../components/Navbar/Navbar";
+import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 
 export default function Login() {

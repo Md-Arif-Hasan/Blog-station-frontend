@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { TextField, Button } from "@mui/material";
 import { register } from "../../services/authentication";
-import "../Styles/register.css";
+import "./register.css";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Jsx/Navbar";
-import { AuthContext } from "../../contexts/contexts";
+import Navbar from "../../components/Navbar/Navbar";
+import { AuthContext } from "../../contexts/Contexts";
 import { useContext } from "react";
 
 export default function Form() {

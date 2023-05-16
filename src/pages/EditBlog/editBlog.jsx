@@ -2,14 +2,14 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { TextField, Button } from "@mui/material";
-import "../Styles/profile.css";
+import "../ProfilePage/profile.css";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../../contexts/contexts";
+import { AuthContext } from "../../contexts/Contexts";
 import { editBlog } from "../../services/blogList";
-import NavbarDashboard from "../../components/Jsx/NavbarDashboard";
+import NavbarDashboard from "../../components/NavbarDashBoard/NavbarDashboard";
 
 function BLogInfo() {
   const [details, setBlogDetails] = useState("");
@@ -45,7 +45,7 @@ function BLogInfo() {
         console.log(details.status);
         if (details.status === 200) {
           setBlogDetails(details.data);
-          navigate(`/blog/users/${username}`);
+          navigate(`/blogs/users/${username}`);
         } else {
           setErrorOrSuccessLine(response.data.message);
           console.log(response.data);
