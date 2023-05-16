@@ -4,7 +4,7 @@ import App from './App'
 import { StyledEngineProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css'
-import { AuthProvider } from './contexts/Contexts.jsx';
+import { AuthProvider } from './contexts/Contexts';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
