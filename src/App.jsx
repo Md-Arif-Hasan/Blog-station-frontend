@@ -10,6 +10,7 @@ import Users from "./pages/authorsPage/Registeredusers";
 import MyBlogs from "./pages/ownBlogs/OwnBlogs";
 import EditBlog from "./pages/editBlog/EditBlog";
 import FullBlog from "./pages/viewFullBlog/FullBlog";
+import AuthorProfile from "./pages/SingleAuthorProfile/AuthorProfile";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/registeredusers" element={<Users />} />
         <Route path="/blogs/create" element={<CreateBlog />} />
+        <Route path="/users/:username" element={<AuthorProfile />} />
         <Route path="/blogs/users/:username" element={<MyBlogs />} />
         <Route path="/blogs/:blogId/edit" element={<EditBlog />} />
         <Route path="/blogs/:blogId" element={<FullBlog />} />

@@ -37,7 +37,7 @@ function SingleBlog({ item }) {
               color: "#863812",
             }}
           >
-            <a onClick={(e) => navigate(`/blogs/${item.id}`, { state: item })}>
+            <a onClick={() => navigate(`/blogs/${item.id}`, { state: item })}>
               {item.title}
             </a>
           </Typography>
@@ -51,7 +51,12 @@ function SingleBlog({ item }) {
               color: "#25383C",
             }}
           >
+            
+
+            <a onClick={() => navigate(`/users/${item.author.username}`, { state: item })}>
             Author: {item.author.username}
+            </a>
+
           </Typography>
 
           {formatTimestamp(item.updatedAt)}

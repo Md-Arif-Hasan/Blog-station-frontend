@@ -75,7 +75,14 @@ function SingleBlog({ item, deleteOneBlog }) {
           Edit
         </Button>
 
-        <Button variant="outlined" onClick={() => setAlertOpen(true)}>
+        <Button variant="outlined"    
+        size="small"
+        disableElevation
+          style={{
+            backgroundColor: "#ffffff",
+            marginRight: "0.5rem",
+            marginBottom: "0.5rem",
+          }} onClick={() => setAlertOpen(true)}>
           Delete
         </Button>
         {alertOpen && (
