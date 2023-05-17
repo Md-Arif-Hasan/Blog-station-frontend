@@ -16,6 +16,8 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
   useEffect(() => {
     const pgNo = searchParams.get("pageNo");
     const pgSize = searchParams.get("pageSize");
+
+    if (pgNo && pgNo !== "null") setPageNumber(pgNo);
     if (pgSize && pgSize !== "null") setPageSize(pgSize);
     fetchAllBlogs(pgNo, pgSize);
   }, [blogAdded, searchParams]);
