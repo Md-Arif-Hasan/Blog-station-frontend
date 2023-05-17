@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/userList";
 import { Grid, ListItem } from "@mui/material";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import { useNavigate } from "react-router-dom";
+
 import "./users.css";
 
 function formatTimestamp(timestamp, createOrUpdate) {
@@ -34,6 +36,7 @@ function formatTimestamp(timestamp, createOrUpdate) {
 
 function AllUsers() {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUsers() {
@@ -50,15 +53,19 @@ function AllUsers() {
           <CardContent>
             <Grid container rowSpacing={0}>
               <Grid item xs={8}>
-                <ListItem style={{ height: "40px" }}>
-                </ListItem>
+                <ListItem style={{ height: "40px" }}></ListItem>
                 <ListItem style={{ height: "40px" }}>
                   <Typography
                     sx={{ fontSize: 25, fontFamily: "Poppins" }}
                     color="text.secondary"
                     gutterBottom
                   >
-                   Username: {item.username}
+                    {" "}
+                    <a
+                      onClick={() => navigate(`/users/${item.username}`)}
+                    >
+                      Username: {item.username}
+                    </a>
                   </Typography>
                 </ListItem>
                 <ListItem>

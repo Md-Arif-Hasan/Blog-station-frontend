@@ -1,14 +1,19 @@
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getAllBlogs } from "../../services/blogList";
+import { getAllBlogsByAuthorId, getAllBlogs } from "../../services/blogList";
 import CircularProgress from "@mui/material/CircularProgress";
 import BlogCard from "../../components/singleBlog/SingleBlog";
 
-
 import "./blogs.css";
 
-function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
+function AllBlogs({
+  blogAdded,
+  setPageNumber,
+  setPageSize,
+  authorId,
+  setBlogCount,
+}) {
   const [blogs, setBlogs] = useState(null);
   const [searchParams] = useSearchParams();
   const [isLoading, setisLoading] = useState(true);
@@ -24,7 +29,12 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
 
   const fetchAllBlogs = async (pageNumber, pageSize) => {
     let allBlogs = null;
-    allBlogs = await getAllBlogs(pageNumber, pageSize);
+    if (authorId) {
+      allBlogs = await getAllBlogsByAuthorId(authorId, pageNumber);
+    } else {
+      
+      allBlogs = await getAllBlogs(pageNumber, pageSize);
+    }
     setisLoading(false);
 
     if (typeof allBlogs === "object") {
@@ -35,25 +45,25 @@ function AllBlogs({ blogAdded, setPageNumber, setPageSize, setBlogCount }) {
       setBlogCount(0);
     }
   };
-  
-  
-  if(isLoading){
-    return(
-       <Box
-          sx={{
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            position: 'absolute',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <CircularProgress color="inherit" />
-        </Box>
-  )}
+
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress color="inherit" />
+      </Box>
+    );
+  }
 
   if (blogs) {
     return (
@@ -75,6 +85,7 @@ export default function BlogList({
   blogAdded,
   setPageNumber,
   setPageSize,
+  authorId,
   setBlogCount,
 }) {
   return (
@@ -82,6 +93,7 @@ export default function BlogList({
       blogAdded={blogAdded}
       setPageNumber={setPageNumber}
       setPageSize={setPageSize}
+      authorId = {authorId}
       setBlogCount={setBlogCount}
     />
   );

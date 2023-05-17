@@ -1,34 +1,30 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../../components/pagination/Pagination";
+import { useSearchParams } from "react-router-dom";
 import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
+import Navbar from "../../components/navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/Contexts";
+import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import { getUserByUsername } from "../../services/user";
+import BlogList from "../allBlogsPage/Blogs";
 
-function BLogInfo() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-
-  useEffect(() => {
-    const data = location.state;
-    if (data) {
-      setUsername(data.author.username);
-      setEmail(data.author.email);
-    }
-  }, []);
-
+function UserInfo({ userName, userEmail }) {
   return (
     <div className="userInfoWrapper">
       <div>
-      <div className="profilePicWrap">
-        <img src="\src\assets\avatar.png" alt="profile" className="profilePic" />
-      </div>
+        <div className="profilePicWrap">
+          <img
+            src="\src\assets\avatar.png"
+            alt="profile"
+            className="profilePic"
+          />
+        </div>
 
         <div className="infoForm">
           <Card className="blogCards">
@@ -43,7 +39,7 @@ function BLogInfo() {
                   color: "#863812",
                 }}
               >
-                Username: {username}
+                Username: {userName}
               </Typography>
               <hr style={{ border: "10px solid #e0d8c3" }} />
               <Typography
@@ -55,50 +51,96 @@ function BLogInfo() {
                   color: "#25383C",
                 }}
               >
-                Email: {email}
+                Email: {userEmail}
               </Typography>
             </CardContent>
           </Card>
         </div>
         <hr style={{ border: "3px solid #e0d8c3" }} />
-
-        <h4>
-          <a
-            onClick={(e) => navigate(-1)}
-            style={{
-              fontSize: "27px",
-              color: "#863812",
-              textDecoration: "none",
-              marginBottom: "2rem",
-            }}
-          >
-            ← Go back 
-          </a>
-        </h4>
       </div>
     </div>
   );
 }
 
-export default function EditBlog() {
-  const [selectedOption, setSelectedOption] = useState("BLogInfo");
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+export default function UsersProfile() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+  const [blogCount, setBlogCount] = useState(0);
+  const [signedIn, setSignedIn] = useState(false)
+  const { checkLoggedIn } = useContext(AuthContext);
+
+  const changePage = (page) => {
+    setPageNumber(page);
   };
+
+  const { username } = useParams();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    if (checkLoggedIn()) {
+      setSignedIn(true);
+    } else {
+      setSignedIn(false);
+    }
+
+ 
+
+    async function fetchUserDetails() {
+      const response = await getUserByUsername(username);
+      if (response.status === 200) {
+        setUserId(response.data.id);
+        setUserName(response.data.username);
+        setUserEmail(response.data.email);
+
+        const pgNo = searchParams.get("pageNo");
+        const pgSize = searchParams.get("pageSize");
+
+        if (parseInt(pgNo) > 0 && pgNo !== "null") setPageNumber(pgNo);
+        if (parseInt(pgSize) > 0 && pgSize !== "null") setPageSize(pgSize);
+      } else {
+        navigate("*");
+      }
+    }
+    fetchUserDetails();
+  }, [username, searchParams]);
 
   return (
     <>
-      <NavbarDashboard />
-      <Box sx={{ display: "flex" }}>
-        <Box
-          component="main"
-          sx={{ flexGrow: 1, bgcolor: "#EBE4D2", p: 3, margin: "auto" }}
+      {signedIn ? <NavbarDashboard /> : <Navbar />}
+      <UserInfo userName={userName} userEmail={userEmail} />
+      <div style={{ margin: "1rem 10rem 3rem" }}>
+        {  userId &&
+          <BlogList
+            blogAdded={null}
+            setPageNumber={setPageNumber}
+            setPageSize={setPageSize}
+            authorId={userId}
+            setBlogCount={setBlogCount}
+          />
+        }
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "1rem 0",
+          }}
         >
-          <Toolbar />
-          {selectedOption === "BLogInfo" ? <BLogInfo /> : null}
-        </Box>
-      </Box>
+        
+        <Pagination
+          changePage={changePage}
+          pageSize={pageSize}
+          pageNumber={pageNumber}
+          blogCount={blogCount}
+        />
+    </div>
+      </div>
     </>
   );
 }
-  
+

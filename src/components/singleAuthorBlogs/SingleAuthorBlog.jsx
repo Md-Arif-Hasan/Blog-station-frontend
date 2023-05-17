@@ -55,7 +55,9 @@ function SingleBlog({ item, deleteOneBlog }) {
               color: "#25383C",
             }}
           >
+            <a onClick={() => navigate(`/users/${item.author.username}`)}>
             Author: {item.author.username}
+            </a>
           </Typography>
 
           {formatTimestamp(item.updatedAt)}

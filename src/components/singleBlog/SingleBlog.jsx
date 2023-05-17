@@ -53,7 +53,7 @@ function SingleBlog({ item }) {
           >
             
 
-            <a onClick={() => navigate(`/users/${item.author.username}`, { state: item })}>
+            <a onClick={() => navigate(`/users/${item.author.username}`)}>
             Author: {item.author.username}
             </a>
 

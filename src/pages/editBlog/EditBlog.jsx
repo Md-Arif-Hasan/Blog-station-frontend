@@ -117,12 +117,32 @@ function BLogInfo() {
         <hr style={{ border: "1px solid #e0d8c3" }} />
 
         <Button
-          variant="contained"
-          className="save"
-          onClick={(e) => getBlogDetails()}
+         size="small"
+         variant="contained"
+         onClick={() => getBlogDetails()}
+         style={{
+           backgroundColor: "#863812",
+           marginRight: "0.5rem",
+           marginBottom: "0.5rem",
+         }}
+         
         >
-          Update Blog
+          Update
         </Button>
+
+        <Button
+         size="small"
+         variant="outlined"
+         style={{
+           backgroundColor: "#ffffff",
+           marginRight: "0.5rem",
+           marginBottom: "0.5rem",
+         }}
+         onClick={() => navigate(-1)}
+        >
+          Cancel
+        </Button>
+
       </div>
     </div>
   );
