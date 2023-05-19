@@ -6,8 +6,9 @@ import { getAllUsers } from "../../services/userList";
 import { Grid, ListItem } from "@mui/material";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { useNavigate } from "react-router-dom";
+import React from 'react';
 
-import "./users.css";
+
 
 function formatTimestamp(timestamp, createOrUpdate) {
   const options = {

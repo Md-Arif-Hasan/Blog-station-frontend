@@ -1,5 +1,6 @@
 import api from "../api";
 
+
 const getAllUsers = async () => {
   try {
     const response = await api.get(`/users`);
