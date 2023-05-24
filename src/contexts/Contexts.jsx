@@ -39,7 +39,9 @@ export const AuthProvider = (props) => {
 
   const setStatusSignedIn = () => {
     try {
-      let jwtcookie = Cookies.get("jwt");
+      // let jwtcookie = Cookies.get("jwt");
+      let jwtcookie = document.cookie;
+      // console.log(jwtcookie, "jwtcookie"	)
       let { username } = jwt_decode(jwtcookie);
       setExpired(false);
       setLoggedInUsername(username);

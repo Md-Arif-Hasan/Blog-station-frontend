@@ -86,17 +86,21 @@ export default function Login() {
               label="Password"
               variant="outlined"
             />
-            <Button className="button" onClick={submit} variant="contained">
+            <Button  data-testid="login" className="button" onClick={submit} variant="contained">
               Login
             </Button>
             <h4 className="loginLine">
               {" "}
               Don't have an account?
               <span>
-                <a href="/register" className="signIn">
+                {/* <a data-testid="signupbutton" onClick={navigate ("/register") } className="signIn">
                   {" "}
                   Sign Up
-                </a>
+                </a> */}
+                   <Button data-testid="loginbutton" onClick={(e) => navigate("/register")} >
+                 Sign Up
+                </Button>
+
               </span>
             </h4>
           </form>

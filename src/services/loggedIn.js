@@ -3,8 +3,10 @@ import jwt_decode from "jwt-decode";
 
 function parseCookie() {
   try {
-    const jwtcookie = Cookies.get("jwt");
+    // const jwtcookie = Cookies.get("jwt");
+    const jwtcookie = document.cookie;
     const token = jwt_decode(jwtcookie);
+
     return token.username;
   } catch {
     Cookies.remove("jwt");

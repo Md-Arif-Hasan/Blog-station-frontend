@@ -40,9 +40,10 @@ export default function Form() {
         email: email,
       };
       try {
+        //navigate("/login");
         const response = await register(newUser);
-        if (response.data.status === 201) {
-          setErrorOrSuccessLine(
+              if (response.data.status === 201) {
+            setErrorOrSuccessLine(
             "User successfully registered! Please go to the login section"
           );
 
@@ -103,14 +104,6 @@ export default function Form() {
     return true;
   };
 
-  const registerStatus = () => {
-    return (
-      <div className="registerStatus">
-        <h5>{errorOrSuccessLine}</h5>
-      </div>
-    );
-  };
-
   return (
     <>
       <Navbar />
@@ -156,7 +149,7 @@ export default function Form() {
               helperText={errorLinePassword}
             />
 
-            <Button className="button" onClick={submit} variant="contained">
+            <Button className="button" data-testid="register" onClick={submit} variant="contained">
               Register
             </Button>
 
@@ -164,10 +157,10 @@ export default function Form() {
               {" "}
               Already have an account?
               <span>
-                <a href="/login" className="signIn">
-                  {" "}
-                  Sign In
-                </a>
+                <Button data-testid="signin" onClick={(e) => navigate("/login")} >
+                 Sign In
+                </Button>
+                 
               </span>
             </h4>
           </form>

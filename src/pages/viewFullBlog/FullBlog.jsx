@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import NavbarDashboard from "../../components/navbarDashBoard/NavbarDashboard";
 import Card from "@mui/material/Card";
@@ -41,7 +41,7 @@ function BLogInfo() {
                   color: "#863812",
                 }}
               >
-                {title}
+                Title: {title}
               </Typography>
               <hr style={{ border: "10px solid #e0d8c3" }} />
               <Typography
@@ -53,14 +53,14 @@ function BLogInfo() {
                   color: "#25383C",
                 }}
               >
-                {description}
+                Description: {description}
               </Typography>
             </CardContent>
           </Card>
         </div>
         <hr style={{ border: "3px solid #e0d8c3" }} />
 
-        <h4>
+        {<h4>
           <a
             onClick={(e) => navigate(-1)}
             style={{
@@ -72,7 +72,7 @@ function BLogInfo() {
           >
             ← Go back 
           </a>
-        </h4>
+        </h4> }
       </div>
     </div>
   );
@@ -86,7 +86,7 @@ export default function EditBlog() {
 
   return (
     <>
-      <NavbarDashboard />
+      { <NavbarDashboard /> }
       <Box sx={{ display: "flex" }}>
         <Box
           component="main"

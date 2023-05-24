@@ -40,8 +40,13 @@ function AllUsers() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("*******************");
     async function fetchUsers() {
+
+      console.log("*******************-----------------------------------");
+
       const allUsers = await getAllUsers();
+      console.log("----------------",allUsers);
       setUsers(allUsers.data);
     }
     fetchUsers();

@@ -114,6 +114,7 @@ export default function UsersProfile() {
     <>
       {signedIn ? <NavbarDashboard /> : <Navbar />}
       <UserInfo userName={userName} userEmail={userEmail} />
+      
       <div style={{ margin: "1rem 10rem 3rem" }}>
         {  userId &&
           <BlogList

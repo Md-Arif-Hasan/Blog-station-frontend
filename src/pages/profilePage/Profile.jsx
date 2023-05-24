@@ -57,9 +57,10 @@ function UserInfo() {
   useEffect(() => {
     async function getUserDetails() {
       let details = await getUserByUsername(loggedInUsername);
+
       setUserDetails(details.data);
-      setUsername(details.data.username);
-      setEmail(details.data.email);
+       setUsername(details.data.username);
+       setEmail(details.data.email);
     }
     if (password.length === 0) {
       setDisableSave(true);
@@ -78,7 +79,7 @@ function UserInfo() {
         <div className="infoForm">
           <form>
             <div className="individual">
-              <h4>Username</h4>
+              <h4>User Name</h4>
               <TextField
                 id="username"
                 label={username === "" ? "Username" : ""}
@@ -91,7 +92,7 @@ function UserInfo() {
               />
             </div>
             <div className="individual">
-              <h4>Email</h4>
+              <h4>Email Address</h4>
               <TextField
                 id="email"
                 label={email === "" ? "Email" : ""}
@@ -144,6 +145,7 @@ function UserInfo() {
       </div>
       <div className="profileButtons">
         <Button
+          data-testid="back"
           variant="outlined"
           className="goBack"
           onClick={(e) => navigate("/dashboard")}
